@@ -193,6 +193,9 @@ WIFI_DRIVER_NVRAM_PATH_PARAM     := "/sys/module/dhd/parameters/nvram_path"
 WIFI_DRIVER_NVRAM_PATH           := "/system/etc/wifi/nvram_net.txt"
 WIFI_BAND                        := 802_11_ABG
 
+# CMHW
+BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
+
 # SELinux
 BOARD_SEPOLICY_DIRS := \
     device/samsung/lt03wifi/sepolicy
