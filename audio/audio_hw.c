@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2011 The Android Open Source Project
  * Copyright (C) 2012 Wolfson Microelectronics plc
@@ -134,6 +135,7 @@ struct audio_device {
     audio_devices_t out_device;
     audio_devices_t in_device;
     bool mic_mute;
+    bool noise_suppression;
     struct audio_route *ar;
     audio_source_t input_source;
     int cur_route_id;     /* current route ID: combination of input source
@@ -1445,8 +1447,10 @@ static int adev_set_parameters(struct audio_hw_device *dev, const char *kvpairs)
     if (ret >= 0) {
         if (strcmp(value, "on") == 0) {
             ALOGV("%s: enabling two mic control", __func__);
+            adev->noise_suppression = true;
             ril_set_two_mic_control(&adev->ril, AUDIENCE, TWO_MIC_SOLUTION_ON);
         } else {
+            adev->noise_suppression = false;
             ALOGV("%s: disabling two mic control", __func__);
             ril_set_two_mic_control(&adev->ril, AUDIENCE, TWO_MIC_SOLUTION_OFF);
         }
@@ -1459,6 +1463,20 @@ static int adev_set_parameters(struct audio_hw_device *dev, const char *kvpairs)
 static char * adev_get_parameters(const struct audio_hw_device *dev,
                                   const char *keys)
 {
+
+    struct audio_device *adev = (struct audio_device *)dev;
+
+    ALOGV("%s: key: %s", __func__, keys);
+
+    if (strcmp(keys, "noise_suppression") == 0) {
+        if (adev->noise_suppression) {
+            return strdup("noise_suppression=on");
+        } else {
+            return strdup("noise_suppression=off");
+        }
+
+    }
+
     return strdup("");
 }
 
