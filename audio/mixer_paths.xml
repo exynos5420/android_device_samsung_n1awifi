@@ -284,6 +284,7 @@ INPUT_CHANNEL_MAP {
       <path name="speaker" />
       <ctl name="AIF2 Mode" value="Slave" />
       <ctl name="SPKOUTL Input 3" value="ASRC2L" />
+      <ctl name="SPKOUTR Input 3" value="ASRC2R" />
   </path>
 
   <path name="voice-earpiece">
