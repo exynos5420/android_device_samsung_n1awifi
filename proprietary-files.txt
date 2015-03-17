@@ -134,5 +134,4 @@ usr/idc/sec_e-pen.idc
 usr/idc/Synaptics_HID_TouchPad.idc
 
 # Modem
-lib/libaudio-ril.so
 lib/libsec-ril.so
