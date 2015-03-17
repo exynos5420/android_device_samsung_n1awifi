@@ -162,6 +162,9 @@ PRODUCT_PACKAGES += \
     libsecril-client-sap \
     cbd
 
+PRODUCT_PACKAGES += \
+    CellBroadcastReceiver
+
 # Recovery
 PRODUCT_PACKAGES += \
     init.recovery.universal5420.rc
