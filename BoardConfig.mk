@@ -139,6 +139,9 @@ BOARD_FLASH_BLOCK_SIZE := 4096
 # PowerHAL
 TARGET_POWERHAL_VARIANT := universal5420
 
+# UMS
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun%d/file
+
 # Recovery
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
