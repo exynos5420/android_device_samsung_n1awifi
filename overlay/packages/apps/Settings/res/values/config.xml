@@ -23,6 +23,4 @@
          Setting to false will disable Home button Wake support -->
     <bool name="config_show_homeWake">false</bool>
 
-    <bool name="has_powercontrol_widget">true</bool>
-
 </resources>
