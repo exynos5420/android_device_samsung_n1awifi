@@ -129,9 +129,5 @@ etc/wifi/cred.conf
 etc/wifi/nvram_mfg.txt
 etc/wifi/nvram_net.txt
 
-# Input
-usr/idc/sec_e-pen.idc
-usr/idc/Synaptics_HID_TouchPad.idc
-
 # Modem
 lib/libsec-ril.so
