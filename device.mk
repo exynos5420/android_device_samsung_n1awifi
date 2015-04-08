@@ -210,6 +210,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     charger_res_images
 
+# CPU producer to CPU consumer not supported
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.bq.gpu_to_cpu_unsupported=1
+
 # adb has root
 ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.adb.secure=0 \
