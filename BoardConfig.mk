@@ -119,6 +119,9 @@ BOARD_USE_DUALDPB_MODE := true
 # Samsung Gralloc
 TARGET_SAMSUNG_GRALLOC_EXTERNAL_USECASES := true
 
+# Audio - fix bluetooth calls distortion
+BOARD_USES_LEGACY_ALSA_AUDIO := true
+
 # Modem
 BOARD_PROVIDES_LIBRIL := true
 BOARD_MODEM_TYPE := xmm6262
