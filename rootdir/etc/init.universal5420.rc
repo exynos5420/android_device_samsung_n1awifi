@@ -1,6 +1,7 @@
 import init.universal5420.usb.rc
-import init.universal5420.wifi.rc
 import init.samsung.rc
+import init.carrier.rc
+import init.universal5420.wifi.rc
 
 on init
     # Set permissions for persist partition
@@ -484,12 +485,6 @@ service watchdogd /sbin/watchdogd 10 20
     class core
     seclabel u:r:watchdogd:s0
 	disabled
-
-# Modem
-service cpboot-daemon /sbin/cbd -d -txmm626x -bh -mh -p13
-    class main
-    user root
-    group radio cache inet misc audio sdcard_rw log sdcard_r shell
 
 # Bluetooth LE 2 wired Test
 service LE_dut_cmd_on /system/bin/bttestintf enable

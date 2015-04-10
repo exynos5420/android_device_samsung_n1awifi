@@ -160,9 +160,10 @@ PRODUCT_PACKAGES += \
     init.universal5420.rc \
     init.universal5420.usb.rc \
     init.universal5420.wifi.rc \
-    ueventd.universal5420.rc
+    ueventd.universal5420.rc \
+    init.carrier.rc
 
-# Radio (needed for audio controls even on wifi-only)
+# Radio (needed for audio controls)
 PRODUCT_PACKAGES += \
     libsecril-client \
     libsecril-client-sap \

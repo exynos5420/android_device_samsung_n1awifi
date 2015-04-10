@@ -1,0 +1,13 @@
+on fs
+service cpboot-daemon /sbin/cbd -d -txmm626x -bh -mh -p 13
+    class main
+    user root
+    group radio cache inet misc audio sdcard_rw log sdcard_r shell
+
+on property:ro.cbd.disable=1
+    stop cpboot-daemon
+    stop ril-daemon
+
+on property:ro.cbd.restart=1
+    restart cpboot-daemon
+    restart ril-daemon
