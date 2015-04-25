@@ -205,6 +205,9 @@ WIFI_BAND                        := 802_11_ABG
 # CMHW
 BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
 
+# Force the screenshot path to CPU consumer (fix glitches)
+COMMON_GLOBAL_CFLAGS += -DFORCE_SCREENSHOT_CPU_PATH
+
 # SELinux
 BOARD_SEPOLICY_DIRS := \
     device/samsung/lt03wifi/sepolicy
