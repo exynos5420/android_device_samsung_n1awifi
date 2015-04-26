@@ -1,7 +1,7 @@
 [
     {
-        "repository": "android_kernel_samsung_lt03wifi",
-        "target_path": "kernel/samsung/lt03wifi"
+        "repository": "kernel_samsung_lt033g",
+        "target_path": "kernel/samsung/lt033g"
     },
     {
         "repository": "android_hardware_samsung",
@@ -24,4 +24,3 @@
         "target_path": "hardware/samsung_slsi/openmax"
     }
 ]
-
