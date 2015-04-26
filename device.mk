@@ -19,7 +19,7 @@ LOCAL_PATH := device/samsung/lt033g
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 PRODUCT_CHARACTERISTICS := tablet
-DEVICE_PACKAGE_OVERLAYS += device/samsung/lt033g/overlay
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := xlarge hdpi xhdpi
@@ -220,10 +220,15 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 
 # root access adb and apps
 ADDITIONAL_BUILD_PROPERTIES += \
-    persist.sys.root_access=3
+    persist.sys.root_access=3 \
+    persist.adb.notify=0
 
-# set default USB configuration
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+# adb has root
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    ro.adb.secure=0 \
+    ro.secure=0 \
+    ro.allow.mock.location=1 \
+    ro.debuggable=1 \
     persist.sys.usb.config=mtp
 
 # call dalvik heap config
