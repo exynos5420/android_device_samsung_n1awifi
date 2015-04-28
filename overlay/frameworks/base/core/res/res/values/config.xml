@@ -241,9 +241,6 @@
     <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">false</bool>
 
-    <!-- Disable the home key unlock setting -->
-    <!-- <bool name="config_disableHomeUnlockSetting">false</bool> -->
-
     <!-- Hardware keys present on the device, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
          of the following keys present:
@@ -255,7 +252,8 @@
             32 - Camera
             64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
-         config to 7. -->
+         config to 7.
+    On Samsung SM-P600/P601 following keys: 1(Home) + 2(Back) + 4(Menu) + 64(Volume) = 71 -->
     <integer name="config_deviceHardwareKeys">67</integer>
 
     <!-- Hardware keys present on the device with the ability to wake, stored as a bit field.
@@ -288,17 +286,9 @@
          * The device must be provisioned with HDCP keys (for protected content).-->
     <bool name="config_enableWifiDisplay">true</bool>
 
-    <!-- True if the Irda service should be started at system start. This currently only
-         supports Samsung Galaxy S4. -->
-    <!-- <bool name="config_enableIrdaManagerService">true</bool> -->
-
     <!-- Enable translucent UI -->
     <bool name="config_enableLockScreenTranslucentDecor">true</bool>
     <bool name="config_enableTranslucentDecor">true</bool>
-
-    <!-- Performance profiles -->
-    <!-- <string name="config_perf_profile_prop">sys.perf.profile</string>
-    <string name="config_perf_profile_default_entry">1</string> -->
 
     <!--  Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">8</integer>
@@ -316,5 +306,11 @@
 
     <!-- reference volume index for music stream to limit headphone volume and display warning -->
     <integer name="config_safe_media_volume_index">7</integer>
+
+    <!-- Boolean to enable stylus gestures -->
+    <bool name="config_stylusGestures">true</bool>
+
+    <!-- Flag indicating if the speed up audio on mt call code should be executed -->
+    <bool name="config_speed_up_audio_on_mt_calls">true</bool>
 
 </resources>
