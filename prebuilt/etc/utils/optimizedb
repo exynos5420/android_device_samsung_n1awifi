@@ -1,0 +1,20 @@
+#!/system/bin/sh
+echo ==============================================
+echo ======= SQLite Databases Optimizing ==========
+echo ==============================================
+for path in "/data/" "/sdcard/" "/extSdCard/";
+do
+echo
+echo ====== Optimizing Databases in $path =========
+echo
+
+for i in \
+`busybox find $path  -iname "*.db"`; 
+do \
+echo $i
+	/system/xbin/sqlite3 $i 'VACUUM;' 2>/dev/null;
+	/system/xbin/sqlite3 $i 'REINDEX;' 2>/dev/null;
+done;
+
+done;
+echo =================== DONE =====================
