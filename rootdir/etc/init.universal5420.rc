@@ -96,13 +96,13 @@ on post-fs-data
 # Bluetooth dhcpcd config
 service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
     class main
-	disabled
-	oneshot
+    disabled
+    oneshot
 
 service iprenew_bt-pan /system/bin/dhcpcd -n
     class late_start
-	disabled
-	oneshot
+    disabled
+    oneshot
 
 on boot
     mount debugfs /sys/kernel/debug /sys/kernel/debug
@@ -343,8 +343,8 @@ on boot
     chown system mtp /dev/mtp_usb
 
 # terminal mode
-	chmod 0660 /sys/class/android_usb/android0/terminal_version
-	chown system system /sys/class/android_usb/android0/terminal_version
+    chmod 0660 /sys/class/android_usb/android0/terminal_version
+    chown system system /sys/class/android_usb/android0/terminal_version
 
 # for datarouter
     chown system system /dev/dun
@@ -398,11 +398,11 @@ on fs
 #For Absolute Persistence Partition 
     mkdir /persdata 0755 system system 
     mkdir /persdata/absolute 0750 system system 
-      
+
     wait /dev/block/platform/dw_mmc.0/by-name/PERSDATA 
     # check_fs /dev/block/platform/dw_mmc.0/by-name/PERSDATA ext4 
     mount ext4 /dev/block/platform/dw_mmc.0/by-name/PERSDATA /persdata/absolute nosuid nodev barrier=1 
-      
+
     chown system system /persdata 
     chmod 0755 /persdata 
     chown system system /persdata/absolute 
@@ -484,7 +484,7 @@ service battery_charger /charger
 service watchdogd /sbin/watchdogd 10 20
     class core
     seclabel u:r:watchdogd:s0
-	disabled
+    disabled
 
 # Bluetooth LE 2 wired Test
 service LE_dut_cmd_on /system/bin/bttestintf enable
@@ -512,7 +512,7 @@ service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
 
 # Kick watchdogd if debug_level is low
 on property:ro.debug_level=0x4f4c
-	start watchdogd
+    start watchdogd
 
 # on userdebug and eng builds, enable kgdb on the serial console
 on property:ro.debuggable=1
