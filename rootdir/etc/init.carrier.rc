@@ -1,5 +1,5 @@
 on fs
-service cpboot-daemon /sbin/cbd -d -txmm626x -bh -mh -p 13
+service cpboot-daemon /sbin/cbd -d -txmm626x -bh -mh -p13
     class main
     user root
     group radio cache inet misc audio sdcard_rw log sdcard_r shell
