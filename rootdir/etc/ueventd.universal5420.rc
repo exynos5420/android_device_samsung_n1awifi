@@ -78,3 +78,5 @@
 
 /dev/block/mmcblk0p13     0660   system     radio
 /dev/umts*                0660   system     radio
+
+/dev/block/mmcblk0p8      0660   system     system
