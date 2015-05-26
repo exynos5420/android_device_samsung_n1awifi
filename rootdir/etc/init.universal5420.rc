@@ -5,7 +5,7 @@ import init.universal5420.wifi.rc
 
 on init
     # Set permissions for persist partition
-    mkdir /persist 0771 system system
+#    mkdir /persist 0771 system system
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /mnt/shell/container 0700 system system
     mkdir /storage 0550 system sdcard_r
@@ -13,6 +13,7 @@ on init
 
     #External storage directories
     mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    mkdir /storage/usbdisk 0000 system system
     mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
 
     mkdir /storage/sdcard1 0700 root root
@@ -35,13 +36,18 @@ on init
     symlink /storage/usbdisk /usbdisk
     symlink /storage/usbdisk /mnt/usbdisk
 
+    symlink /data/app /factory
+
     # Modem stuff
-    setprop ro.radio.noril no
-    setprop hw.nophone false
+#    setprop ro.radio.noril no
+#    setprop hw.nophone false
     mkdir /efs 0771 radio system
     symlink /dev/block/mmcblk0p13 /dev/mbin0
     restorecon /dev/mbin0
     symlink /sys/devices/platform/s5p-ehci/ehci_power /dev/ehci_power
+
+    # Make param link
+    symlink /dev/block/mmcblk0p8 /dev/block/param
 
 on early-init
     write /sys/block/mmcblk0/queue/read_ahead_kb 512
@@ -56,8 +62,11 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor interactive
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor interactive
+    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "20000 1000000:40000 1500000:20000"
     write /sys/devices/system/cpu/cpufreq/interactive/check_fast_target_loads "50 1000000:66"
+    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 9999999
     write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 0
+    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor 100000
     write /sys/devices/system/cpu/cpufreq/interactive/target_loads 85
 
@@ -87,7 +96,7 @@ on post-fs-data
     chown bluetooth bluetooth /dev/btlock
 
 # Added for TZ Playready DRM Support
-    mkdir /efs/drm 0700 drm system
+    mkdir /efs/drm 0774 drm system
     mkdir /efs/drm/playready 0775 drm system
 
     #Create directory for hostapd
@@ -106,6 +115,8 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
 
 on boot
     mount debugfs /sys/kernel/debug /sys/kernel/debug
+    setprop ro.radio.noril no
+    start ril-daemon
 
     # Reduce reserved lowmem from ~48MB to ~12MB
     write /proc/sys/vm/lowmem_reserve_ratio "128 128"
@@ -116,14 +127,17 @@ on boot
 
     setprop ro.build.product universal_5420
     setprop ro.product.device universal_5420
-#    chmod 0666 /dev/pvrsrvkm
+
+    chmod 0644 /proc/cmdline
 
 # mobicore
     mkdir /data/app/mcRegistry 0775 system system
     chmod 0700 /dev/mobicore
     chmod 0666 /dev/mobicore-user
+    chmod 0660 /dev/s5p-smem
     chown system system /dev/mobicore
     chown radio system /dev/mobicore-user
+    chown system system /dev/s5p-smem
 
 # DRK permission
     mkdir /efs/prov 0770 radio system
@@ -148,7 +162,6 @@ on boot
     chown system radio /sys/class/sec/tsp/cmd
     chown system system /sys/class/input/input1/enabled
     chmod 0660 /sys/class/input/input1/enabled
-    chown system radio /sys/class/sec/sec_touchscreen/set_tsp_for_inputmethod
 
 # Permissions for Touchkey
     chown system radio /sys/class/sec/sec_touchkey/enable_disable
@@ -173,8 +186,6 @@ on boot
     write /sys/class/sec/sec_key/wakeup_keys 116,172
 
 # Permissions for EPEN
-    chown system system /sys/class/input/input8/enabled
-    chmod 0660 /sys/class/input/input8/enabled
     chown system radio /sys/class/sec/sec_epen/epen_firm_update
     chown system radio /sys/class/sec/sec_epen/epen_rotation
     chown system radio /sys/class/sec/sec_epen/epen_hand
@@ -185,8 +196,6 @@ on boot
     chown system radio /sys/class/sec/sec_epen/epen_saving_mode
     chown system radio /sys/class/sec/sec_epen/epen_connection
     chown system radio /sys/class/sec/sec_epen/boost_level
-    chown system system /sys/class/input/input8/enabled
-    chmod 0660 /sys/class/input/input8/enabled
 
 # SENSORS
 # Accelerometer_sensor
@@ -308,23 +317,23 @@ on boot
     chown radio system /sys/devices/platform/exynos5-tmu/curr_temp
 
 # Quadrant Benchmark
-    chown radio system /sys/class/thermal/thermal_zone0/boost_mode
+#    chown radio system /sys/class/thermal/thermal_zone0/boost_mode
     chown radio system /sys/class/devfreq/exynos5-busfreq-mif/min_freq
     chown radio system /sys/class/devfreq/exynos5-busfreq-int/min_freq
     chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/min_freq
     chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_freq
     chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/freq_table
-    chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_eagle_count
+#    chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_eagle_count
 #    chown radio system /sys/devices/platform/pvrsrvkm.0/sgx_dvfs_max_lock
 #    chown radio system /sys/devices/platform/pvrsrvkm.0/sgx_dvfs_min_lock
 #    chown radio system /sys/devices/platform/pvrsrvkm.0/sgx_dvfs_table
-    chmod 0664 /sys/class/thermal/thermal_zone0/boost_mode
+#    chmod 0664 /sys/class/thermal/thermal_zone0/boost_mode
     chmod 0664 /sys/class/devfreq/exynos5-busfreq-mif/min_freq
     chmod 0664 /sys/class/devfreq/exynos5-busfreq-int/min_freq
     chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/min_freq
     chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_freq
     chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/freq_table
-    chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_eagle_count
+#    chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_eagle_count
 #    chmod 0664 /sys/devices/platform/pvrsrvkm.0/sgx_dvfs_max_lock
 #    chmod 0664 /sys/devices/platform/pvrsrvkm.0/sgx_dvfs_min_lock
 #    chmod 0664 /sys/devices/platform/pvrsrvkm.0/sgx_dvfs_table
@@ -400,13 +409,13 @@ on fs
     mkdir /persdata/absolute 0750 system system 
 
     wait /dev/block/platform/dw_mmc.0/by-name/PERSDATA 
-    # check_fs /dev/block/platform/dw_mmc.0/by-name/PERSDATA ext4 
-    mount ext4 /dev/block/platform/dw_mmc.0/by-name/PERSDATA /persdata/absolute nosuid nodev barrier=1 
+#   check_fs /dev/block/platform/dw_mmc.0/by-name/PERSDATA ext4
+    mount ext4 /dev/block/platform/dw_mmc.0/by-name/PERSDATA /persdata/absolute nosuid nodev barrier=1
 
-    chown system system /persdata 
-    chmod 0755 /persdata 
-    chown system system /persdata/absolute 
-    chmod 0750 /persdata/absolute 
+    chown system system /persdata
+    chmod 0755 /persdata
+    chown system system /persdata/absolute
+    chmod 0750 /persdata/absolute
 
 # Permissions for backlight
     chown system system /sys/class/backlight/panel/brightness
@@ -450,14 +459,6 @@ on fs
     rm /data/glonass_started
     rm /data/smd_started
     rm /data/sv_cno.info
-
-# Permissions Camera
-    chown system radio /sys/class/camera/rear/rear_camfw
-    chown system radio /sys/class/camera/rear/rear_camtype
-    chown system radio /sys/class/camera/flash/rear_flash
-#    chown system radio /sys/class/camera/rear/isp_core
-    chown system radio /sys/class/camera/front/front_camfw
-    chown system radio /sys/class/camera/front/front_camtype
 
 # virtual sdcard daemon running as media_rw (1023)
 service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
