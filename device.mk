@@ -177,6 +177,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     CellBroadcastReceiver
 
+# Samsung
+PRODUCT_PACKAGES += \
+    SamsungServiceMode
+
 # Recovery
 PRODUCT_PACKAGES += \
     init.recovery.universal5420.rc
@@ -197,6 +201,7 @@ PRODUCT_PACKAGES += \
     com.dsi.ant.antradio_library \
     libantradio
 
+# Wifi
 PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd \
