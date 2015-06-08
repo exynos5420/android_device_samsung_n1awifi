@@ -1,7 +1,7 @@
 
 project vendor/cm/
 diff --git a/vendor/cm/config/common.mk b/vendor/cm/config/common.mk
-index 0847ee0..f1e52b0 100644
+index 10cba86..567bd03 100644
 --- a/vendor/cm/config/common.mk
 +++ b/vendor/cm/config/common.mk
 @@ -106,10 +106,6 @@ PRODUCT_COPY_FILES += \
@@ -15,7 +15,7 @@ index 0847ee0..f1e52b0 100644
  # CM-specific init file
  PRODUCT_COPY_FILES += \
      vendor/cm/prebuilt/common/etc/init.local.rc:root/init.cm.rc
-@@ -182,7 +178,6 @@ PRODUCT_PACKAGES += \
+@@ -181,7 +177,6 @@ PRODUCT_PACKAGES += \
      mke2fs \
      tune2fs \
      bash \
@@ -23,7 +23,7 @@ index 0847ee0..f1e52b0 100644
      htop \
      powertop \
      lsof \
-@@ -231,7 +226,7 @@ PRODUCT_PACKAGES += \
+@@ -230,7 +225,7 @@ PRODUCT_PACKAGES += \
  endif
  
  PRODUCT_PROPERTY_OVERRIDES += \
@@ -33,10 +33,10 @@ index 0847ee0..f1e52b0 100644
  PRODUCT_PACKAGE_OVERLAYS += vendor/cm/overlay/common
  
 diff --git a/vendor/cm/config/common_full.mk b/vendor/cm/config/common_full.mk
-index 4d60e5e..40661dd 100644
+index 14eadc7..199b929 100644
 --- a/vendor/cm/config/common_full.mk
 +++ b/vendor/cm/config/common_full.mk
-@@ -23,6 +23,5 @@ PRODUCT_PACKAGES += \
+@@ -20,6 +20,5 @@ PRODUCT_PACKAGES += \
  
  # Extra tools in CM
  PRODUCT_PACKAGES += \
