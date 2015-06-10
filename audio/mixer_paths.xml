@@ -227,6 +227,10 @@ INPUT_CHANNEL_MAP {
   </path>
 
   <path name="sco-out">
+    <ctl name="ASRC1L Input" value="AIF1RX1" />
+    <ctl name="ASRC1R Input" value="AIF1RX2" />
+    <ctl name="AIF3TX1 Input 1" value="AIF2RX1" />
+    <ctl name="AIF3TX2 Input 1" value="AIF2RX2" />
     <ctl name="AIF3TX1 Input 2" value="AIF2RX1" />
     <ctl name="AIF3TX2 Input 2" value="AIF2RX2" />
   </path>
