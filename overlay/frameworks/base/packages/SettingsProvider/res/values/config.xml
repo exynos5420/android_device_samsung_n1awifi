@@ -30,5 +30,12 @@
     <integer name="def_notif_count">1</integer>
 
     <bool name="def_accelerometer_rotation">true</bool>
+
+    <!-- Bitmask of allowed display rotation angles:
+           ROTATION_0_MODE: 1
+           ROTATION_90_MODE: 2
+           ROTATION_180_MODE: 4
+           ROTATION_270_MODE: 8 -->
+    <integer name="def_accelerometer_rotation_angles">15</integer>
 </resources>
 
