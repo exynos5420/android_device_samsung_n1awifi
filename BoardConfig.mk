@@ -119,6 +119,9 @@ TARGET_SAMSUNG_GRALLOC_EXTERNAL_USECASES := true
 # Audio - fix bluetooth calls distortion
 BOARD_USES_LEGACY_ALSA_AUDIO := true
 
+# SurfaceFlinger
+BOARD_USES_SYNC_MODE_FOR_MEDIA := true
+
 # Modem
 BOARD_PROVIDES_LIBRIL := true
 BOARD_MODEM_TYPE := xmm6262
