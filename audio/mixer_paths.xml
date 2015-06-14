@@ -206,6 +206,50 @@ INPUT_CHANNEL_MAP {
     <ctl name="ASRC1R Input" value="AIF1RX2" />
   </path>
 
+  <!-- Volume -->
+
+  <path name="speaker-volume-incall">
+    <ctl name="Speaker Digital Volume" value="136" />
+    <ctl name="SPKOUTL Input 1 Volume" value="10" />
+    <ctl name="SPKOUTR Input 1 Volume" value="10" />
+    <ctl name="SPKOUTL Input 2 Volume" value="10" />
+    <ctl name="SPKOUTR Input 2 Volume" value="10" />
+    <ctl name="SPKOUTL Input 3 Volume" value="32" />
+    <ctl name="SPKOUTR Input 3 Volume" value="32" />
+    <ctl name="SPKOUTL Input 4 Volume" value="32" />
+    <ctl name="SPKOUTR Input 4 Volume" value="32" />
+  </path>
+
+   <path name="speaker-volume-normal">
+    <ctl name="Speaker Digital Volume" value="144" />
+    <ctl name="SPKOUTL Input 1 Volume" value="32" />
+    <ctl name="SPKOUTR Input 1 Volume" value="32" />
+    <ctl name="SPKOUTL Input 2 Volume" value="32" />
+    <ctl name="SPKOUTR Input 2 Volume" value="32" />
+  </path>
+
+  <!-- Verb -->
+
+  <path name="verb-normal">
+    <ctl name="AIF2 Mode" value="Master" />
+    <ctl name="EPOUT Input 3" value="None" />
+    <ctl name="HPOUT1L Input 2" value="None" />
+    <ctl name="HPOUT1R Input 2" value="None" />
+    <ctl name="SPKOUTL Input 3" value="None" />
+    <ctl name="SPKOUTR Input 3" value="None" />
+    <ctl name="EPOUT DRE Switch" value="1" />
+  </path>
+
+  <path name="verb-voicecall">
+    <ctl name="AIF2 Mode" value="Slave" />
+    <ctl name="EPOUT Input 3" value="ASRC2L" />
+    <ctl name="HPOUT1L Input 2" value="ASRC2L" />
+    <ctl name="HPOUT1R Input 2" value="ASRC2R" />
+    <ctl name="SPKOUTL Input 3" value="ASRC2L" />
+    <ctl name="SPKOUTR Input 3" value="ASRC2R" />
+    <ctl name="EPOUT DRE Switch" value="0" />
+  </path>
+
   <!-- Paths that roughly correspond to devices -->
 
   <path name="speaker">
@@ -282,9 +326,8 @@ INPUT_CHANNEL_MAP {
   <!-- Playback paths -->
   <path name="voice-speaker">
     <path name="speaker" />
-    <ctl name="AIF2 Mode" value="Slave" />
-    <ctl name="SPKOUTL Input 3" value="ASRC2L" />
-    <ctl name="SPKOUTR Input 3" value="ASRC2R" />
+    <path name="speaker-volume-incall" />
+    <path name="verb-voicecall" />
   </path>
 
   <path name="voice-earpiece">
@@ -302,18 +345,32 @@ INPUT_CHANNEL_MAP {
 
   <path name="media-speaker">
     <path name="speaker" />
+    <path name="speaker-volume-normal" />
+    <path name="verb-normal" />
   </path>
 
   <path name="media-earpiece">
     <path name="earpiece" />
+    <path name="verb-normal" />
+    <ctl name="EPOUT Digital Volume" value="125" />
+    <ctl name="EPOUT Input 1 Volume" value="32" />
+    <ctl name="EPOUT Input 2 Volume" value="32" />
+    <ctl name="EPOUT Input 3 Volume" value="32" />
+    <ctl name="EPOUT Input 4 Volume" value="32" />
   </path>
 
   <path name="media-headphones">
     <path name="headphones" />
+    <ctl name="Noise Gate Switch" value="0" />
+    <ctl name="HPOUT1 Digital Volume" value="132" />
+    <ctl name="HPOUT1L Input 1 Volume" value="32" />
+    <ctl name="HPOUT1R Input 1 Volume" value="32" />
+    <path name="verb-normal" />
   </path>
 
   <path name="voice-rec-speaker">
     <path name="speaker" />
+    <path name="speaker-volume-normal" />
   </path>
 
   <path name="voice-rec-headphones">
@@ -322,10 +379,12 @@ INPUT_CHANNEL_MAP {
 
   <path name="communication-speaker">
     <path name="speaker" />
+    <path name="speaker-volume-incall" />
   </path>
 
   <path name="communication-earpiece">
     <path name="earpiece" />
+    <ctl name="EPOUT Digital Volume" value="120" />
   </path>
 
   <path name="communication-headphones">
