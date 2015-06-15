@@ -32,6 +32,7 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_CPU_VARIANT := cortex-a15
+ARCH_ARM_HAVE_TLS_REGISTER := true
 
 # Bionic Tuning
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
