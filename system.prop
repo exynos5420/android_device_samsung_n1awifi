@@ -35,6 +35,7 @@ rild.libpath=/system/lib/libsec-ril.so
 rild.libargs=-d /dev/ttyS0
 ro.ril.hsxpa=1
 ro.ril.gprsclass=10
+telephony.lteOnGsmDevice=0
 
 # Fast mass storage
 ro.vold.umsdirtyratio=50
