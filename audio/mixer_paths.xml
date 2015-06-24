@@ -209,7 +209,7 @@ INPUT_CHANNEL_MAP {
   <!-- Volume -->
 
   <path name="speaker-volume-incall">
-    <ctl name="Speaker Digital Volume" value="136" />
+    <ctl name="Speaker Digital Volume" value="135" />
     <ctl name="SPKOUTL Input 1 Volume" value="10" />
     <ctl name="SPKOUTR Input 1 Volume" value="10" />
     <ctl name="SPKOUTL Input 2 Volume" value="10" />
@@ -221,7 +221,7 @@ INPUT_CHANNEL_MAP {
   </path>
 
    <path name="speaker-volume-normal">
-    <ctl name="Speaker Digital Volume" value="144" />
+    <ctl name="Speaker Digital Volume" value="135" />
     <ctl name="SPKOUTL Input 1 Volume" value="32" />
     <ctl name="SPKOUTR Input 1 Volume" value="32" />
     <ctl name="SPKOUTL Input 2 Volume" value="32" />
