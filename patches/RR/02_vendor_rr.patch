@@ -1,7 +1,7 @@
 
 project vendor/cm/
 diff --git a/vendor/cm/config/common.mk b/vendor/cm/config/common.mk
-index 10cba86..567bd03 100644
+index 5e03739..c760bf9 100644
 --- a/vendor/cm/config/common.mk
 +++ b/vendor/cm/config/common.mk
 @@ -106,10 +106,6 @@ PRODUCT_COPY_FILES += \
@@ -15,7 +15,7 @@ index 10cba86..567bd03 100644
  # CM-specific init file
  PRODUCT_COPY_FILES += \
      vendor/cm/prebuilt/common/etc/init.local.rc:root/init.cm.rc
-@@ -181,7 +177,6 @@ PRODUCT_PACKAGES += \
+@@ -182,7 +178,6 @@ PRODUCT_PACKAGES += \
      mke2fs \
      tune2fs \
      bash \
@@ -23,7 +23,7 @@ index 10cba86..567bd03 100644
      htop \
      powertop \
      lsof \
-@@ -230,7 +225,7 @@ PRODUCT_PACKAGES += \
+@@ -231,7 +226,7 @@ PRODUCT_PACKAGES += \
  endif
  
  PRODUCT_PROPERTY_OVERRIDES += \
