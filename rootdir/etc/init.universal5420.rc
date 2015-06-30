@@ -4,8 +4,11 @@ import init.carrier.rc
 import init.universal5420.wifi.rc
 
 on init
+    # Disable SELinux
+#    setenforce 0
+#    setprop ro.boot.selinux 0
+
     # Set permissions for persist partition
-#    mkdir /persist 0771 system system
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /mnt/shell/container 0700 system system
     mkdir /storage 0550 system sdcard_r
@@ -39,8 +42,6 @@ on init
     symlink /data/app /factory
 
     # Modem stuff
-#    setprop ro.radio.noril no
-#    setprop hw.nophone false
     mkdir /efs 0771 radio system
     symlink /dev/block/mmcblk0p13 /dev/mbin0
     restorecon /dev/mbin0
@@ -69,11 +70,6 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor 100000
     write /sys/devices/system/cpu/cpufreq/interactive/target_loads 85
-
-    # Configure the cpu-boost module
-    #write /sys/module/cpu_boost/parameters/boost_ms 10
-    #write /sys/module/cpu_boost/parameters/input_boost_freq 1200000
-    #write /sys/module/cpu_boost/parameters/input_boost_ms 40
 
 on post-fs-data
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
