@@ -1,0 +1,15 @@
+
+project vendor/cm/
+diff --git a/vendor/cm/tools/squisher b/vendor/cm/tools/squisher
+index 3d1c415..abb5fd5 100755
+--- a/vendor/cm/tools/squisher
++++ b/vendor/cm/tools/squisher
+@@ -31,8 +31,4 @@ DELETE_BINS="applypatch applypatch_static check_prereq recovery updater"
+ # Optimize PNG resources in APKs
+ ( cd $OUT/system; find framework/ app/ priv-app/ vendor/ app/ -name \*.apk -print | $XARGS $OPTICHARGER; )
+ 
+-# Add changelog
+-. $ANDROID_BUILD_TOP/vendor/cm/tools/changelog
+-mv $OUT/Changelog.txt $OUT/Changelog.txt
+-
+ exit 0
