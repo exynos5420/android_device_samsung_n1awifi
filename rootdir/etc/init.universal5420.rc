@@ -4,9 +4,6 @@ import init.carrier.rc
 import init.universal5420.wifi.rc
 
 on init
-    # Disable SELinux
-#    setenforce 0
-#    setprop ro.boot.selinux 0
 
     # Set permissions for persist partition
     mkdir /mnt/shell/emulated 0700 shell shell
@@ -522,9 +519,13 @@ service bttestdaemon /system/bin/bttestd
     disabled
     oneshot
 
-# for ethernet
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
-    class main
+service dhcpcd_eth0 /system/bin/dhcpcd -aABDKL
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_eth0 /system/bin/dhcpcd -n
+    class late_start
     disabled
     oneshot
 
