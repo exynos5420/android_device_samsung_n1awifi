@@ -78,10 +78,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/keylayout/sec_touchscreen.kl:system/usr/keylayout/sec_touchscreen.kl
 
 # Utilities
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/xbin/remount:system/xbin/remount \
-    $(LOCAL_PATH)/prebuilt/etc/utils/optimizedb:system/etc/utils/optimizedb \
-    $(LOCAL_PATH)/prebuilt/etc/utils/optimizestorage:system/etc/utils/optimizestorage
+PRODUCT_PACKAGES += \
+    remount \
+    optimizedb \
+    optimizestorage
 
 # IR
 PRODUCT_PACKAGES += \
