@@ -64,7 +64,7 @@ PRODUCT_PACKAGES += \
 # HW composer
 PRODUCT_PACKAGES += \
     libion \
-    libcec \
+    hwcomposer.exynos5 \
     gralloc.exynos5
 
 # idc
@@ -87,6 +87,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     consumerir.universal5420
 
+# Keystore
+PRODUCT_PACKAGES += \
+    keystore.exynos5
+
 # Lights
 PRODUCT_PACKAGES += \
     lights.universal5420
@@ -107,6 +111,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libMcClient \
     libMcRegistry \
+    libPaApi \
     libgdmcprov \
     mcDriverDaemon
 
@@ -114,6 +119,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libpcap \
     tcpdump
+
+# OMX
+PRODUCT_PACKAGES += \
+    libcsc \
+    libExynosOMX_Core \
+    libOMX.Exynos.MP3.Decoder \
+    libstagefrighthw
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -232,11 +244,7 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
 
 # call hwui memory config
-$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
 # call the proprietary setup
-$(call inherit-product, vendor/samsung/lt033g/lt033g-vendor.mk)
-
-# call Samsung LSI board support package
-$(call inherit-product, hardware/samsung_slsi/exynos5-insignal/exynos5.mk)
-$(call inherit-product, hardware/samsung_slsi/exynos5420/exynos5420.mk)
+$(call inherit-product-if-exists, vendor/samsung/lt033g/lt033g-vendor.mk)
