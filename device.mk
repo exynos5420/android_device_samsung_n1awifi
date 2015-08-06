@@ -232,7 +232,8 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.allow.mock.location=1 \
     ro.debuggable=1 \
     persist.sys.usb.config=mtp \
-    ro.selinux=permissive
+    ro.selinux=permissive \
+    persist.service.adb.enable=1
 
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
