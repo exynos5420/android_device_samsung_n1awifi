@@ -220,13 +220,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.bq.gpu_to_cpu_unsupported=1
 
-# adb has root
-ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.adb.secure=0 \
-    ro.secure=0 \
-    ro.allow.mock.location=1 \
-    ro.debuggable=1
-
 # root access adb and apps
 ADDITIONAL_BUILD_PROPERTIES += \
     persist.sys.root_access=3 \
@@ -238,7 +231,8 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.secure=0 \
     ro.allow.mock.location=1 \
     ro.debuggable=1 \
-    persist.sys.usb.config=mtp
+    persist.sys.usb.config=mtp \
+    ro.selinux=permissive
 
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk)
