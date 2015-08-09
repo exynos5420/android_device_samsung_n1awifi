@@ -105,8 +105,8 @@ enum {
     GRALLOC_USAGE_HW_CAMERA_ZSL         = 0x00060000,
     /* mask for the camera access values */
     GRALLOC_USAGE_HW_CAMERA_MASK        = 0x00060000,
-    /* buffer will be used by the framebuffer device with sysmmu off */
-    GRALLOC_USAGE_HW_FB_PHY_LINEAR      = 0x00008000,
+    /* buffer will be used by the HW IPs when sysmmu is off */
+    GRALLOC_USAGE_PHYSICALLY_LINEAR     = 0x01000000,
     /* mask for the software usage bit-mask */
     GRALLOC_USAGE_HW_MASK               = 0x00079F00,
 
@@ -125,6 +125,7 @@ enum {
      * composition to the external sink.
      */
     GRALLOC_USAGE_PROTECTED             = 0x00004000,
+    GRALLOC_USAGE_GPU_BUFFER            = 0x00800000,
 
     /* buffer may be used as a cursor */
     GRALLOC_USAGE_CURSOR                = 0x00008000,
