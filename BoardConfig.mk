@@ -199,6 +199,7 @@ BOARD_USES_WFD := true
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
+BOARD_ANT_WIRELESS_POWER := "bluedroid"
 
 # Wifi
 BOARD_HAVE_SAMSUNG_WIFI          := true
