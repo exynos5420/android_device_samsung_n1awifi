@@ -1,7 +1,7 @@
 
 project vendor/cm/
 diff --git a/vendor/cm/config/common.mk b/vendor/cm/config/common.mk
-index 51a53c6..2e7a382 100644
+index 261741e..9ca54d8 100644
 --- a/vendor/cm/config/common.mk
 +++ b/vendor/cm/config/common.mk
 @@ -106,10 +106,6 @@ PRODUCT_COPY_FILES += \
@@ -15,7 +15,7 @@ index 51a53c6..2e7a382 100644
  # CM-specific init file
  PRODUCT_COPY_FILES += \
      vendor/cm/prebuilt/common/etc/init.local.rc:root/init.cm.rc
-@@ -187,7 +183,6 @@ PRODUCT_PACKAGES += \
+@@ -182,7 +178,6 @@ PRODUCT_PACKAGES += \
      mke2fs \
      tune2fs \
      bash \
@@ -23,7 +23,7 @@ index 51a53c6..2e7a382 100644
      htop \
      powertop \
      lsof \
-@@ -239,7 +234,7 @@ PRODUCT_PACKAGES += \
+@@ -234,7 +229,7 @@ PRODUCT_PACKAGES += \
  endif
  
  PRODUCT_PROPERTY_OVERRIDES += \
@@ -44,7 +44,7 @@ index 14eadc7..199b929 100644
      zip \
      unrar
 diff --git a/vendor/cm/overlay/common/frameworks/base/core/res/res/values/config.xml b/vendor/cm/overlay/common/frameworks/base/core/res/res/values/config.xml
-index 3700b11..e17efd7 100644
+index 80ed09a..924efc3 100644
 --- a/vendor/cm/overlay/common/frameworks/base/core/res/res/values/config.xml
 +++ b/vendor/cm/overlay/common/frameworks/base/core/res/res/values/config.xml
 @@ -23,7 +23,6 @@
