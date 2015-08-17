@@ -37,5 +37,7 @@
            ROTATION_180_MODE: 4
            ROTATION_270_MODE: 8 -->
     <integer name="def_accelerometer_rotation_angles">15</integer>
-</resources>
 
+    <string name="def_airplane_mode_radios" translatable="false">cell,bluetooth,wifi,nfc,wimax,ant</string>
+    <string name="airplane_mode_toggleable_radios" translatable="false">bluetooth,wifi,nfc,ant</string>
+</resources>
