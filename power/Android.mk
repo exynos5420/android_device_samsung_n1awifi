@@ -1,4 +1,4 @@
-# Copyright (C) 2014, The CyanogenMod Project <http://www.cyanogenmod.org>
+# Copyright (C) 2015 TeamEOS
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE := power.universal5420
 LOCAL_MODULE_RELATIVE_PATH := hw
-LOCAL_SRC_FILES := power.c
+LOCAL_SRC_FILES := power_hal.c
 LOCAL_SHARED_LIBRARIES := liblog
 LOCAL_MODULE_TAGS := optional
 
