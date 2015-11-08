@@ -21,9 +21,31 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 PRODUCT_CHARACTERISTICS := tablet
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
+# Graphics
+
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
+
+PRODUCT_PACKAGES += \
+    libion \
+    libcec
+
+PRODUCT_PACKAGES += \
+    hwcomposer.exynos5 \
+    gralloc.exynos5 \
+    memtrack.exynos5
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sf.lcd_density=320 \
+    ro.opengles.version=196608 \
+    ro.bq.gpu_to_cpu_unsupported=1 \
+    lockscreen.rot_override=true
+
+# Boot animation
+TARGET_SCREEN_HEIGHT := 1600
+TARGET_SCREEN_WIDTH := 2560
+TARGET_BOOTANIMATION_HALF_RES := true
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -34,19 +56,22 @@ PRODUCT_PACKAGES += \
     tinymix
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-    $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/configs/mixer_paths.xml:system/etc/mixer_paths.xml
+    $(LOCAL_PATH)/configs/audio/mixer_paths.xml:system/etc/mixer_paths.xml
 
-# Boot animation
-TARGET_SCREEN_HEIGHT := 1600
-TARGET_SCREEN_WIDTH := 2560
-TARGET_BOOTANIMATION_HALF_RES := true
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+    $(LOCAL_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    af.fast_track_multiplier=1
 
 # Camera
 PRODUCT_PACKAGES += \
     camera.universal5420 \
     libhwjpeg
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    camera2.portability.force_api=1
 
 # Camera permissions
 PRODUCT_COPY_FILES += \
@@ -62,21 +87,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gps.universal5420
 
-# HW composer
-PRODUCT_PACKAGES += \
-    libion \
-    hwcomposer.exynos5 \
-    gralloc.exynos5
-
-# idc
+# Touchscreen
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/idc/sec_e-pen.idc:system/usr/idc/sec_e-pen.idc \
-    $(LOCAL_PATH)/configs/idc/Synaptics_HID_TouchPad.idc:system/usr/idc/Synaptics_HID_TouchPad.idc
-
-# Keylayouts
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    $(LOCAL_PATH)/configs/idc/Synaptics_HID_TouchPad.idc:system/usr/idc/Synaptics_HID_TouchPad.idc \
     $(LOCAL_PATH)/configs/idc/Synaptics_RMI4_TouchPad_Sensor.idc:system/usr/idc/Synaptics_RMI4_TouchPad_Sensor.idc \
+    $(LOCAL_PATH)/configs/idc/sec_e-pen.idc:system/usr/idc/sec_e-pen.idc \
+    $(LOCAL_PATH)/configs/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
     $(LOCAL_PATH)/configs/keylayout/sec_touchscreen.kl:system/usr/keylayout/sec_touchscreen.kl
 
 # Utilities
@@ -89,10 +105,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     consumerir.universal5420
 
-# Keystore
-PRODUCT_PACKAGES += \
-    keystore.exynos5
-
 # Lights
 PRODUCT_PACKAGES += \
     lights.universal5420
@@ -102,18 +114,20 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml  \
-    $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
+    $(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml
 
-# Misc
+# USB
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.isUsbOtgEnabled=true
 
 # MobiCore setup
 PRODUCT_PACKAGES += \
     libMcClient \
     libMcRegistry \
-    libPaApi \
     libgdmcprov \
     mcDriverDaemon
 
@@ -122,12 +136,32 @@ PRODUCT_PACKAGES += \
     libpcap \
     tcpdump
 
-# OMX
+### OMX
+# Stagefright and device specific modules
 PRODUCT_PACKAGES += \
-    libcsc \
+    libstagefrighthw \
     libExynosOMX_Core \
-    libOMX.Exynos.MP3.Decoder \
-    libstagefrighthw
+    libcsc
+
+# Audio codecs
+PRODUCT_PACKAGES += \
+    libOMX.Exynos.AAC.Decoder \
+    libOMX.Exynos.FLAC.Decoder \
+    libOMX.Exynos.MP3.Decoder
+
+# Video codecs
+PRODUCT_PACKAGES += \
+    libOMX.Exynos.AVC.Decoder \
+    libOMX.Exynos.AVC.Encoder \
+    libOMX.Exynos.HEVC.Decoder \
+    libOMX.Exynos.MPEG4.Decoder \
+    libOMX.Exynos.MPEG4.Encoder \
+    libOMX.Exynos.VP8.Decoder \
+    libOMX.Exynos.WMV.Decoder
+
+# Some Exynos HW codecs require AwesomePlayer
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.media.use-awesome=true
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -156,10 +190,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.xml:system/etc/permissions/android.software.sip.xml \
     external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml
 
-# Bluetooth
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
-
 # Power
 PRODUCT_PACKAGES += \
     power.universal5420
@@ -173,35 +203,36 @@ PRODUCT_PACKAGES += \
     ueventd.universal5420.rc \
     init.carrier.rc
 
-# Radio (needed for audio controls)
+# Radio
 PRODUCT_PACKAGES += \
     libsecril-client \
     libsecril-client-sap \
     cbd
 
 PRODUCT_PACKAGES += \
-    CellBroadcastReceiver
-
-# Samsung
-PRODUCT_PACKAGES += \
+    CellBroadcastReceiver \
     SamsungServiceMode
+
+# Modem settings
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.ril_class=lt033gRIL \
+    rild.libpath=/system/lib/libsec-ril.so \
+    rild.libargs=-d /dev/ttyS0 \
+    ro.ril.hsxpa=1 \
+    ro.ril.gprsclass=10 \
+    telephony.lteOnGsmDevice=0 \
+    ro.ril.telephony.mqanelements=5 \
+    ro.data.large_tcp_window_size=true \
+    ro.use_data_netmgrd=false \
+    persist.data.netmgrd.qos.enable=false
 
 # Recovery
 PRODUCT_PACKAGES += \
     init.recovery.universal5420.rc
 
-# Sensors
-PRODUCT_PACKAGES += \
-    sensors.universal5420
-
-# Wifi
+# Bluetooth
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
-    $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
-
-# external/wpa_supplicant_8/wpa_supplicant/wpa_supplicant_conf.mk
-PRODUCT_PACKAGES += \
-    wpa_supplicant.conf
+    $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
 
 # ANT+
 PRODUCT_PACKAGES += \
@@ -210,16 +241,25 @@ PRODUCT_PACKAGES += \
     libantradio
 
 # Wifi
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
+    $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
+
+# external/wpa_supplicant_8/wpa_supplicant/wpa_supplicant_conf.mk
+PRODUCT_PACKAGES += \
+    wpa_supplicant.conf
+
 PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd \
     hostapd_default.conf \
     libwpa_client \
-    wpa_supplicant
-
-PRODUCT_PACKAGES += \
+    wpa_supplicant \
     libnetcmdiface \
     macloader
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0
 
 # for off charging mode
 PRODUCT_PACKAGES += \
@@ -229,24 +269,23 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     exyrngd
 
-# CPU producer to CPU consumer not supported
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.bq.gpu_to_cpu_unsupported=1
-
-# root access adb and apps
-ADDITIONAL_BUILD_PROPERTIES += \
-    persist.sys.root_access=3 \
-    persist.adb.notify=0
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    ro.allow.mock.location=1 \
+    persist.sys.usb.config=mtp \
+    ro.selinux=permissive
 
 # adb has root
 ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.adb.secure=0 \
+    persist.adb.notify=0 \
     ro.secure=0 \
-    ro.allow.mock.location=1 \
+    persist.sys.root_access=3 \
     ro.debuggable=1 \
-    persist.sys.usb.config=mtp \
-    ro.selinux=permissive \
     persist.service.adb.enable=1
+
+# Fast mass storage
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vold.umsdirtyratio=50
 
 # DALVIK/ART
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -273,6 +312,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.fbo_cache_size=16
 
 # call the proprietary setup
-$(call inherit-product-if-exists, vendor/samsung/lt033g/lt033g-vendor.mk)
+$(call inherit-product, vendor/samsung/lt033g/lt033g-vendor.mk)
 
 $(call inherit-product, hardware/samsung_slsi/exynos5420/exynos5420.mk)

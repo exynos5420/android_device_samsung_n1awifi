@@ -2,7 +2,7 @@
 echo ==============================================
 echo ======= SQLite Databases Optimizing ==========
 echo ==============================================
-for path in "/data/" "/sdcard/" "/extSdCard/";
+for path in "/data/" "/sdcard/" "/external_sd/";
 do
 echo
 echo ====== Optimizing Databases in $path =========

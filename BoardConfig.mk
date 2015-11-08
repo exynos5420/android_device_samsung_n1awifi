@@ -30,9 +30,7 @@ TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
 TARGET_CPU_VARIANT := cortex-a15
-ARCH_ARM_HAVE_TLS_REGISTER := true
 
 # Bionic Tuning
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
@@ -59,6 +57,7 @@ TARGET_KERNEL_CONFIG := cyanogenmod_lt033g_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/lt033g
 
 # Charger/Healthd
+BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 CHARGING_ENABLED_PATH := "/sys/class/power_supply/battery/batt_lp_charging"
@@ -72,23 +71,16 @@ TARGET_NO_RADIOIMAGE := true
 # FIMG2D
 BOARD_USES_SKIA_FIMGAPI := true
 BOARD_USES_NEON_BLITANTIH := true
+BOARD_USES_FIMGAPI_V4L2 := false
 
 # Graphics
-BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl.cfg
+BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl/egl.cfg
 OVERRIDE_RS_DRIVER := libRSDriverArm.so
 USE_OPENGL_RENDERER := true
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 5
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 # HWCServices
 BOARD_USES_HWC_SERVICES := true
-
-# Media
-COMMON_GLOBAL_CFLAGS += -DUSE_NATIVE_SEC_NV12TILED # use format from fw/native
-COMMON_GLOBAL_CFLAGS += -DWIDEVINE_PLUGIN_PRE_NOTIFY_ERROR
-
-# HDMI
-BOARD_USES_GSC_VIDEO := true
-BOARD_USES_CEC := true
 
 # GSC
 BOARD_USES_ONLY_GSC0_GSC1 := true
@@ -105,27 +97,34 @@ BOARD_HARDWARE_CLASS += device/samsung/lt033g/cmhw
 # Init
 TARGET_NR_SVC_SUPP_GIDS := 20
 
-# OpenMAX Video
+# Samsung LSI OpenMAX
+COMMON_GLOBAL_CFLAGS += -DUSE_NATIVE_SEC_NV12TILED # use format from fw/native
+COMMON_GLOBAL_CFLAGS += -DWIDEVINE_PLUGIN_PRE_NOTIFY_ERROR
+
+# Samsung OpenMAX Video
 BOARD_USE_STOREMETADATA := true
 BOARD_USE_METADATABUFFERTYPE := true
-BOARD_USE_S3D_SUPPORT := true
 BOARD_USE_DMA_BUF := true
 BOARD_USE_ANB_OUTBUF_SHARE := true
-BOARD_USE_GSC_RGB_ENCODER := true
 BOARD_USE_IMPROVED_BUFFER := true
+BOARD_USE_NON_CACHED_GRAPHICBUFFER := true
+BOARD_USE_GSC_RGB_ENCODER := true
 BOARD_USE_CSC_HW := false
-BOARD_USE_H264_PREPEND_SPS_PPS := false
 BOARD_USE_QOS_CTRL := false
+BOARD_USE_S3D_SUPPORT := true
 BOARD_USE_VP8ENC_SUPPORT := true
-BOARD_USE_ENCODER_RGBINPUT_SUPPORT := true
-BOARD_USE_DUALDPB_MODE := true
+
+# HEVC support in libvideocodec
+BOARD_USE_HEVC_HWIP := true
+BOARD_USE_HEVCDEC_SUPPORT := true
+
+# MP3/WMA support
+BOARD_USE_ALP_AUDIO := true
+BOARD_USE_SEIREN_AUDIO := true
+BOARD_USE_WMA_CODEC := true
 
 # Samsung Gralloc
 TARGET_SAMSUNG_GRALLOC_EXTERNAL_USECASES := true
-
-# Audio
-BOARD_USES_LEGACY_ALSA_AUDIO := true
-BOARD_USES_LIBMEDIA_WITH_AUDIOPARAMETER := true
 
 # SurfaceFlinger
 BOARD_USES_SYNC_MODE_FOR_MEDIA := true
@@ -134,8 +133,6 @@ BOARD_USES_SYNC_MODE_FOR_MEDIA := true
 BOARD_PROVIDES_LIBRIL := true
 BOARD_MODEM_TYPE := xmm6262
 BOARD_RIL_CLASS := ../../../device/samsung/lt033g/ril
-# we need define it (because audio.primary.universal5420.so requires it)
-COMMON_GLOBAL_CFLAGS += -DSEC_PRODUCT_FEATURE_RIL_CALL_DUALMODE_CDMAGSM
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
@@ -158,6 +155,9 @@ WITH_DEXPREOPT := true
 
 # UMS
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun%d/file
+
+# Use these flags if the board has a ext4 partition larger than 2gb
+BOARD_HAS_LARGE_FILESYSTEM := true
 
 # Recovery
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
@@ -190,18 +190,21 @@ BOARD_SEPOLICY_UNION += \
     wpa.te \
     rild.te \
     vold.te \
-    cpboot-daemon.te
+    cpboot-daemon.te \
+    exyrngd.te
 
 # Webkit
 ENABLE_WEBGL := true
 
 # WFD
-BOARD_USES_WFD_SERVICE := true
 BOARD_USES_WFD := true
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 BOARD_ANT_WIRELESS_POWER := "bluedroid"
+
+# Keymaster
+BOARD_USES_TRUST_KEYMASTER := true
 
 # Wifi
 BOARD_HAVE_SAMSUNG_WIFI          := true
@@ -214,4 +217,6 @@ BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/dhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA          := "/system/etc/wifi/bcmdhd_sta.bin"
 WIFI_DRIVER_FW_PATH_AP           := "/system/etc/wifi/bcmdhd_apsta.bin"
+WIFI_DRIVER_NVRAM_PATH_PARAM     := "/sys/module/dhd/parameters/nvram_path"
+WIFI_DRIVER_NVRAM_PATH           := "/system/etc/wifi/nvram_net.txt"
 WIFI_BAND                        := 802_11_ABG
