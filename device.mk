@@ -274,3 +274,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # call the proprietary setup
 $(call inherit-product-if-exists, vendor/samsung/lt033g/lt033g-vendor.mk)
+
+$(call inherit-product, hardware/samsung_slsi/exynos5420/exynos5420.mk)
