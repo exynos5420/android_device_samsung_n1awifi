@@ -220,6 +220,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     charger_res_images
 
+# RANDOM NUMBER GENERATOR
+PRODUCT_PACKAGES += \
+    exyrngd
+
 # CPU producer to CPU consumer not supported
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.bq.gpu_to_cpu_unsupported=1

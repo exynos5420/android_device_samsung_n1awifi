@@ -495,6 +495,13 @@ service battery_charger /charger
     critical
     seclabel u:r:healthd:s0
 
+# ExyRng startup
+service exyrngd /system/bin/exyrngd -b
+    user root
+    group root
+    class main
+    oneshot
+
 # Set watchdog timer to 30 seconds and pet it every 10 seconds to get a 20 second margin
 service watchdogd /sbin/watchdogd 10 20
     class core
