@@ -213,19 +213,6 @@ PRODUCT_PACKAGES += \
     CellBroadcastReceiver \
     SamsungServiceMode
 
-# Modem settings
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.ril_class=lt033gRIL \
-    rild.libpath=/system/lib/libsec-ril.so \
-    rild.libargs=-d /dev/ttyS0 \
-    ro.ril.hsxpa=1 \
-    ro.ril.gprsclass=10 \
-    telephony.lteOnGsmDevice=0 \
-    ro.ril.telephony.mqanelements=5 \
-    ro.data.large_tcp_window_size=true \
-    ro.use_data_netmgrd=false \
-    persist.data.netmgrd.qos.enable=false
-
 # Recovery
 PRODUCT_PACKAGES += \
     init.recovery.universal5420.rc
