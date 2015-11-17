@@ -70,8 +70,6 @@ TARGET_NO_RADIOIMAGE := true
 
 # FIMG2D
 BOARD_USES_SKIA_FIMGAPI := true
-BOARD_USES_NEON_BLITANTIH := true
-BOARD_USES_FIMGAPI_V4L2 := false
 
 # Graphics
 BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl/egl.cfg
