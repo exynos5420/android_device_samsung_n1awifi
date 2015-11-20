@@ -8,7 +8,7 @@ on init
     # Set permissions for persist partition
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /mnt/shell/container 0700 system system
-    mkdir /storage 0550 system sdcard_r
+    mkdir /storage 0551 system sdcard_r
     mkdir /storage/emulated 0555 root root
 
     #External storage directories
