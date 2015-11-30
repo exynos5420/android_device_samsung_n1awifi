@@ -148,7 +148,7 @@ INPUT_CHANNEL_MAP {
     <ctl name="SPKOUTR Input 1 Volume" value="32"/>
     <ctl name="SPKOUTL Input 3 Volume" value="32"/>
     <ctl name="EPOUT Digital Volume" value="128"/>
-    <ctl name="Speaker Digital Volume" value="122"/>
+    <ctl name="Speaker Digital Volume" value="135"/>
     <ctl name="Input Ramp Up" value="8ms/6dB"/>
     <ctl name="RCV Switch" value="0"/>
     <ctl name="SPK Switch" value="0"/>
@@ -206,7 +206,7 @@ INPUT_CHANNEL_MAP {
     <path name="builtin-mic">
         <ctl name="Main Mic Switch" value="1"/>
         <ctl name="LHPF1 Input 1" value="IN1L"/>
-        <ctl name="IN1L Volume" value="25"/>
+        <ctl name="IN1L Volume" value="20"/>
         <ctl name="LHPF1 Input 1 Volume" value="32"/>
         <ctl name="IN1L Digital Volume" value="128"/>
     </path>
@@ -245,9 +245,9 @@ INPUT_CHANNEL_MAP {
         <ctl name="SPKOUTL Input 1 Volume" value="31"/>
         <ctl name="SPKOUTR Input 1 Volume" value="31"/>
         <ctl name="SPKOUTL Input 3 Volume" value="30"/>
-        <ctl name="HPOUT1 Digital Volume" value="115"/>
-        <ctl name="EPOUT Digital Volume" value="122"/>
-        <ctl name="Speaker Digital Volume" value="121"/>
+        <ctl name="HPOUT1 Digital Volume" value="132"/>
+        <ctl name="EPOUT Digital Volume" value="125"/>
+        <ctl name="Speaker Digital Volume" value="135"/>
         <ctl name="EPOUT DRE Switch" value="1"/>
     </path>
 
@@ -297,7 +297,7 @@ INPUT_CHANNEL_MAP {
         <path name="voice-setup"/>
         <path name="speaker"/>
         <ctl name="SPKOUTL Input 3 Volume" value="30"/>
-        <ctl name="Speaker Digital Volume" value="128"/>
+        <ctl name="Speaker Digital Volume" value="135"/>
     </path>
 
     <path name="voice-headphones">
