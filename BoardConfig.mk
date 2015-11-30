@@ -190,8 +190,7 @@ BOARD_SEPOLICY_UNION += \
     wpa.te \
     rild.te \
     vold.te \
-    cpboot-daemon.te \
-    exyrngd.te
+    cpboot-daemon.te
 
 # Webkit
 ENABLE_WEBGL := true

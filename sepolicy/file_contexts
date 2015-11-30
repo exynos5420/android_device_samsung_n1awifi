@@ -58,6 +58,3 @@
 /dev/umts_log           u:object_r:radio_device:s0
 /dev/umts_rfs0          u:object_r:radio_device:s0
 /dev/umts_router        u:object_r:radio_device:s0
-
-# Exyrngd
-/sbin/exyrngd           u:object_r:exyrngd_exec:s0
