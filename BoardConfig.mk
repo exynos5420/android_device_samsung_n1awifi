@@ -138,9 +138,6 @@ BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
 # PowerHAL
 TARGET_POWERHAL_VARIANT := universal5420
 
-# Enable dex-preoptimization to speed up first boot sequence
-WITH_DEXPREOPT := true
-
 # UMS
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun%d/file
 
