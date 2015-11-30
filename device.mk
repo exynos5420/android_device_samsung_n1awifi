@@ -249,16 +249,8 @@ PRODUCT_PACKAGES += \
 ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.allow.mock.location=1 \
     persist.sys.usb.config=mtp \
-    ro.selinux=permissive
-
-# adb has root
-ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.adb.secure=0 \
-    persist.adb.notify=0 \
-    ro.secure=0 \
-    persist.sys.root_access=3 \
-    ro.debuggable=1 \
-    persist.service.adb.enable=1
+    ro.debug_level=0x4948 \
+    ro.secure=0
 
 # Fast mass storage
 PRODUCT_PROPERTY_OVERRIDES += \
