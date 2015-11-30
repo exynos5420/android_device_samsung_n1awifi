@@ -145,23 +145,17 @@ PRODUCT_PACKAGES += \
 
 # Audio codecs
 PRODUCT_PACKAGES += \
-    libOMX.Exynos.AAC.Decoder \
-    libOMX.Exynos.FLAC.Decoder \
     libOMX.Exynos.MP3.Decoder
 
 # Video codecs
 PRODUCT_PACKAGES += \
     libOMX.Exynos.AVC.Decoder \
     libOMX.Exynos.AVC.Encoder \
-    libOMX.Exynos.HEVC.Decoder \
     libOMX.Exynos.MPEG4.Decoder \
     libOMX.Exynos.MPEG4.Encoder \
     libOMX.Exynos.VP8.Decoder \
+    libOMX.Exynos.VP8.Encoder \
     libOMX.Exynos.WMV.Decoder
-
-# Some Exynos HW codecs require AwesomePlayer
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.media.use-awesome=true
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -296,5 +290,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # call the proprietary setup
 $(call inherit-product, vendor/samsung/lt033g/lt033g-vendor.mk)
-
-$(call inherit-product, hardware/samsung_slsi/exynos5420/exynos5420.mk)

@@ -13,32 +13,32 @@
     },
     {
         "remote": "github",
-        "repository": "TeamEOS/hardware_samsung",
-        "revision": "lp5.1",
+        "repository": "CyanogenMod/hardware_samsung",
+        "revision": "cm-12.1",
         "target_path": "hardware/samsung"
     },
     {
         "remote": "github",
-        "repository": "TeamEOS/hardware_samsung_slsi_exynos",
-        "revision": "lp5.1",
+        "repository": "CyanogenMod/hardware_samsung_slsi_exynos",
+        "revision": "cm-12.1",
         "target_path": "hardware/samsung_slsi/exynos"
     },
     {
         "remote": "github",
-        "repository": "TeamEOS/hardware_samsung_slsi-exynos5-insignal",
-        "revision": "lp5.1",
+        "repository": "CyanogenMod/hardware_samsung_slsi-exynos5-insignal",
+        "revision": "cm-12.1",
         "target_path": "hardware/samsung_slsi/exynos5-insignal"
     },
     {
         "remote": "github",
-        "repository": "TeamEOS/hardware_samsung_slsi_exynos5420",
-        "revision": "lp5.1",
+        "repository": "CyanogenMod/hardware_samsung_slsi_exynos5420",
+        "revision": "cm-12.1",
         "target_path": "hardware/samsung_slsi/exynos5420"
     },
     {
         "remote": "github",
-        "repository": "TeamEOS/hardware_samsung_slsi_openmax",
-        "revision": "lp5.1",
+        "repository": "CyanogenMod/hardware_samsung_slsi_openmax",
+        "revision": "cm-12.1",
         "target_path": "hardware/samsung_slsi/openmax"
     },
     {
