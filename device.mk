@@ -280,5 +280,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_height=4096 \
     ro.hwui.fbo_cache_size=16
 
+$(call inherit-product-if-exists, build/target/product/full.mk)
 # call the proprietary setup
 $(call inherit-product, vendor/samsung/lt033g/lt033g-vendor.mk)
