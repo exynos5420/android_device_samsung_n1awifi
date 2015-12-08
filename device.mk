@@ -18,6 +18,9 @@ LOCAL_PATH := device/samsung/lt033g
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
+# The gps config appropriate for this device
+$(call inherit-product, device/common/gps/gps_eu_supl.mk)
+
 PRODUCT_CHARACTERISTICS := tablet
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
