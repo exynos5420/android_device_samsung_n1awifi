@@ -1,1 +1,0 @@
-allow vold vold_tmpfs:file create_file_perms;

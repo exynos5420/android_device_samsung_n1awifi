@@ -1,0 +1,23 @@
+From 53b918791ba1a2679a0a5f36a6e779eccbcfd699 Mon Sep 17 00:00:00 2001
+From: Christopher R. Palmer <crpalmer@gmail.com>
+Date: Sat, 15 Aug 2015 06:37:05 -0400
+Subject: [PATCH] stagefright: Add libhwc to exynos include paths
+
+Change-Id: I49041751e72625be80e99a9758792e58091d577e
+---
+
+project frameworks/av/
+diff --git a/frameworks/av/media/libstagefright/Android.mk b/frameworks/av/media/libstagefright/Android.mk
+index db23ced..61db54b 100644
+--- a/frameworks/av/media/libstagefright/Android.mk
++++ b/frameworks/av/media/libstagefright/Android.mk
+@@ -146,7 +146,8 @@
+         $(TOP)/hardware/$(SLSI_DIR)/$(TARGET_SOC)/libhwcmodule \
+         $(TOP)/hardware/$(SLSI_DIR)/$(TARGET_SOC)/include \
+         $(TOP)/hardware/$(SLSI_DIR)/exynos/libexynosutils \
+-        $(TOP)/hardware/$(SLSI_DIR)/exynos/include
++        $(TOP)/hardware/$(SLSI_DIR)/exynos/include \
++        $(TOP)/hardware/$(SLSI_DIR)/exynos/libhwc
+ 
+ LOCAL_ADDITIONAL_DEPENDENCIES := \
+         $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr

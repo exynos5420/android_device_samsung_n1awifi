@@ -7,6 +7,3 @@ ro.ril.hsxpa=1
 ro.ril.gprsclass=10
 telephony.lteOnGsmDevice=0
 ro.ril.telephony.mqanelements=5
-ro.data.large_tcp_window_size=true
-ro.use_data_netmgrd=true
-persist.data.netmgrd.qos.enable=false

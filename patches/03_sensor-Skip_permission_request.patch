@@ -1,0 +1,46 @@
+From eed05ce980d89f74475d3b8b85fae31737427844 Mon Sep 17 00:00:00 2001
+From: Christopher N. Hesse <raymanfx@gmail.com>
+Date: Sun, 29 Nov 2015 00:39:51 +0100
+Subject: [PATCH] DO NOT MERGE: sensor: Skip permission request
+
+We need to find a better way to work around this issue.
+
+Change-Id: I698f4129e71b683f6f063f00da79f32a5f521149
+---
+
+project frameworks/native/
+diff --git a/frameworks/native/libs/gui/Android.mk b/frameworks/native/libs/gui/Android.mk
+index 8a965dd..76aec6e 100644
+--- a/frameworks/native/libs/gui/Android.mk
++++ b/frameworks/native/libs/gui/Android.mk
+@@ -91,6 +91,10 @@
+ 	LOCAL_CFLAGS += -DDONT_USE_FENCE_SYNC
+ endif
+ 
++ifeq ($(TARGET_NO_SENSOR_PERMISSION_CHECK),true)
++LOCAL_CPPFLAGS += -DNO_SENSOR_PERMISSION_CHECK
++endif
++
+ include $(BUILD_SHARED_LIBRARY)
+ 
+ ifeq (,$(ONE_SHOT_MAKEFILE))
+diff --git a/frameworks/native/libs/gui/Sensor.cpp b/frameworks/native/libs/gui/Sensor.cpp
+index 4b3603e..1f4b535 100644
+--- a/frameworks/native/libs/gui/Sensor.cpp
++++ b/frameworks/native/libs/gui/Sensor.cpp
+@@ -262,6 +262,7 @@
+         }
+     }
+ 
++#ifndef NO_SENSOR_PERMISSION_CHECK
+     if (mRequiredPermission.length() > 0) {
+         // If the sensor is protected by a permission we need to know if it is
+         // a runtime one to determine whether we can use the permission cache.
+@@ -272,6 +273,7 @@
+                     String16(mRequiredPermission));
+         }
+     }
++#endif
+ }
+ 
+ Sensor::~Sensor()

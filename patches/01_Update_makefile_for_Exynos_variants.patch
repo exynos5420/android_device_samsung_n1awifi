@@ -1,0 +1,48 @@
+From 35ab90323734432019d2561870b1ca4ededc9a88 Mon Sep 17 00:00:00 2001
+From: Ethan Chen <intervigil@gmail.com>
+Date: Fri, 14 Aug 2015 14:11:44 -0700
+Subject: [PATCH] stagefright: Update makefile for Exynos variants.
+
+Change-Id: I1f6a2797156eba00e8f4cc1a5728b8e274ce965f
+---
+
+project frameworks/av/
+diff --git a/frameworks/av/media/libstagefright/Android.mk b/frameworks/av/media/libstagefright/Android.mk
+index beb86d7..84da271 100644
+--- a/frameworks/av/media/libstagefright/Android.mk
++++ b/frameworks/av/media/libstagefright/Android.mk
+@@ -127,17 +127,26 @@
+ 
+ ifeq ($(BOARD_USE_S3D_SUPPORT), true)
+ ifeq ($(BOARD_USES_HWC_SERVICES), true)
++
++ifeq ($(TARGET_SLSI_VARIANT),cm)
++SLSI_DIR := samsung_slsi-cm
++PLATFORM_DIR := $(TARGET_BOARD_PLATFORM)
++else
++SLSI_DIR := samsung_slsi
++PLATFORM_DIR := $(TARGET_BOARD_PLATFORM)-$(TARGET_SLSI_VARIANT)
++endif
++
+ LOCAL_CFLAGS += -DUSE_S3D_SUPPORT -DHWC_SERVICES
+ LOCAL_C_INCLUDES += \
+         $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include \
+-        $(TOP)/hardware/samsung_slsi/openmax/include/exynos \
+-        $(TOP)/hardware/samsung_slsi/$(TARGET_BOARD_PLATFORM)-insignal/libhwcService \
+-        $(TOP)/hardware/samsung_slsi/$(TARGET_BOARD_PLATFORM)-insignal/libhwc \
+-        $(TOP)/hardware/samsung_slsi/$(TARGET_BOARD_PLATFORM)-insignal/include \
+-        $(TOP)/hardware/samsung_slsi/$(TARGET_SOC)/libhwcmodule \
+-        $(TOP)/hardware/samsung_slsi/$(TARGET_SOC)/include \
+-        $(TOP)/hardware/samsung_slsi/exynos/libexynosutils \
+-        $(TOP)/hardware/samsung_slsi/exynos/include
++        $(TOP)/hardware/$(SLSI_DIR)/openmax/include/exynos \
++        $(TOP)/hardware/$(SLSI_DIR)/$(PLATFORM_DIR)/libhwcService \
++        $(TOP)/hardware/$(SLSI_DIR)/$(PLATFORM_DIR)/libhwc \
++        $(TOP)/hardware/$(SLSI_DIR)/$(PLATFORM_DIR)/include \
++        $(TOP)/hardware/$(SLSI_DIR)/$(TARGET_SOC)/libhwcmodule \
++        $(TOP)/hardware/$(SLSI_DIR)/$(TARGET_SOC)/include \
++        $(TOP)/hardware/$(SLSI_DIR)/exynos/libexynosutils \
++        $(TOP)/hardware/$(SLSI_DIR)/exynos/include
+ 
+ LOCAL_ADDITIONAL_DEPENDENCIES := \
+         $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr

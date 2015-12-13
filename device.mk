@@ -19,7 +19,7 @@ LOCAL_PATH := device/samsung/lt033g
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # The gps config appropriate for this device
-$(call inherit-product, device/common/gps/gps_eu_supl.mk)
+#$(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
 PRODUCT_CHARACTERISTICS := tablet
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
@@ -33,6 +33,9 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 PRODUCT_PACKAGES += \
     libion \
     libcec
+
+PRODUCT_PACKAGES += \
+    libstlport
 
 PRODUCT_PACKAGES += \
     hwcomposer.exynos5 \
@@ -67,6 +70,9 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     af.fast_track_multiplier=1
+
+PRODUCT_PACKAGES += \
+    libsamsung_symbols
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -129,10 +135,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # MobiCore setup
 PRODUCT_PACKAGES += \
+    mcDriverDaemon \
     libMcClient \
     libMcRegistry \
-    libgdmcprov \
-    mcDriverDaemon
+    libgdmcprov
 
 # Network tools
 PRODUCT_PACKAGES += \
@@ -147,17 +153,19 @@ PRODUCT_PACKAGES += \
     libcsc
 
 # Audio codecs
-PRODUCT_PACKAGES += \
-    libOMX.Exynos.MP3.Decoder
+#PRODUCT_PACKAGES += \
+#    libOMX.Exynos.AAC.Decoder \
+#    libOMX.Exynos.FLAC.Decoder \
+#    libOMX.Exynos.MP3.Decoder
 
 # Video codecs
 PRODUCT_PACKAGES += \
     libOMX.Exynos.AVC.Decoder \
     libOMX.Exynos.AVC.Encoder \
+    libOMX.Exynos.HEVC.Decoder \
     libOMX.Exynos.MPEG4.Decoder \
     libOMX.Exynos.MPEG4.Encoder \
     libOMX.Exynos.VP8.Decoder \
-    libOMX.Exynos.VP8.Encoder \
     libOMX.Exynos.WMV.Decoder
 
 # Permissions
@@ -249,11 +257,24 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     charger_res_images
 
+# RANDOM NUMBER GENERATOR
+PRODUCT_PACKAGES += \
+    exyrngd
+
 ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.allow.mock.location=1 \
     persist.sys.usb.config=mtp \
+    ro.allow.mock.location=1 \
     ro.debug_level=0x4948 \
     ro.secure=0
+
+# adb has root
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    ro.adb.secure=0 \
+    persist.adb.notify=0 \
+    ro.secure=0 \
+    persist.sys.root_access=3 \
+    ro.debuggable=1 \
+    persist.service.adb.enable=1
 
 # Fast mass storage
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -284,5 +305,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.fbo_cache_size=16
 
 $(call inherit-product-if-exists, build/target/product/full.mk)
+$(call inherit-product, hardware/samsung_slsi-cm/exynos5420/exynos5420.mk)
 # call the proprietary setup
 $(call inherit-product, vendor/samsung/lt033g/lt033g-vendor.mk)

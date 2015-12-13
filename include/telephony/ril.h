@@ -59,7 +59,6 @@ extern "C" {
 #define MAX_QEMU_PIPE_NAME_LENGTH  11
 #define MAX_UUID_LENGTH 64
 
-
 typedef void * RIL_Token;
 
 typedef enum {
@@ -101,7 +100,7 @@ typedef enum {
     RIL_E_ILLEGAL_SIM_OR_ME = 15,               /* network selection failed due to
                                                    illegal SIM or ME */
     RIL_E_MISSING_RESOURCE = 16,                /* no logical channel available */
-    RIL_E_NO_SUCH_ELEMENT = 17,                  /* application not found on SIM */
+    RIL_E_NO_SUCH_ELEMENT = 17,                 /* application not found on SIM */
     RIL_E_DIAL_MODIFIED_TO_USSD = 18,           /* DIAL request modified to USSD */
     RIL_E_DIAL_MODIFIED_TO_SS = 19,             /* DIAL request modified to SS */
     RIL_E_DIAL_MODIFIED_TO_DIAL = 20,           /* DIAL request modified to DIAL with different
@@ -113,7 +112,8 @@ typedef enum {
     RIL_E_SS_MODIFIED_TO_DIAL = 24,             /* SS request modified to DIAL */
     RIL_E_SS_MODIFIED_TO_USSD = 25,             /* SS request modified to USSD */
     RIL_E_SUBSCRIPTION_NOT_SUPPORTED = 26,      /* Subscription not supported by RIL */
-    RIL_E_SS_MODIFIED_TO_SS = 27                /* SS request modified to different SS request */
+    RIL_E_SS_MODIFIED_TO_SS = 27,               /* SS request modified to different SS request */
+    RIL_E_LCE_NOT_SUPPORTED = 36                /* LCE service not supported(36 in RILConstants.java) */
 
 
 } RIL_Errno;
@@ -163,7 +163,7 @@ typedef enum {
     RADIO_TECH_HSPAP = 15, // HSPA+
     RADIO_TECH_GSM = 16, // Only supports voice
     RADIO_TECH_TD_SCDMA = 17,
-    RADIO_TECH_DCHSPAP = 30
+    RADIO_TECH_IWLAN = 18
 } RIL_RadioTechnology;
 
 typedef enum {
@@ -296,6 +296,8 @@ typedef struct {
     char            als;        /* ALS line indicator if available
                                    (0 = line 1) */
     char            isVoice;    /* nonzero if this is is a voice call */
+    char            isVideo;    /* Samsung xmm7260 */
+
     char            isVoicePrivacy;     /* nonzero if CDMA voice privacy mode is active */
     char *          number;     /* Remote party number */
     int             numberPresentation; /* 0=Allowed, 1=Restricted, 2=Not Specified/Unknown 3=Payphone */
@@ -320,6 +322,7 @@ typedef struct {
  */
 typedef struct {
     int             status;     /* A RIL_DataCallFailCause, 0 which is PDP_FAIL_NONE if no error */
+#ifndef HCRADIO
     int             suggestedRetryTime; /* If status != 0, this fields indicates the suggested retry
                                            back-off timer value RIL wants to override the one
                                            pre-configured in FW.
@@ -327,6 +330,7 @@ typedef struct {
                                            The value < 0 means no value is suggested.
                                            The value 0 means retry should be done ASAP.
                                            The value of INT_MAX(0x7fffffff) means no retry. */
+#endif
     int             cid;        /* Context ID, uniquely identifies this call */
     int             active;     /* 0=inactive, 1=active/physical link down, 2=active/physical link up */
     char *          type;       /* One of the PDP_type values in TS 27.007 section 10.1.1.
@@ -565,6 +569,27 @@ typedef struct {
                         * Level index of CPICH Received Signal Code Power in UMTS
                         */
 } RIL_NeighboringCell;
+
+typedef struct {
+  char lce_status;                 /* LCE service status:
+                                    * -1 = not supported;
+                                    * 0 = stopped;
+                                    * 1 = active.
+                                    */
+  unsigned int actual_interval_ms; /* actual LCE reporting interval,
+                                    * meaningful only if LCEStatus = 1.
+                                    */
+} RIL_LceStatusInfo;
+
+typedef struct {
+  unsigned int last_hop_capacity_kbps; /* last-hop cellular capacity: kilobits/second. */
+  unsigned char confidence_level;      /* capacity estimate confidence: 0-100 */
+  unsigned char lce_suspended;         /* LCE report going to be suspended? (e.g., radio
+                                        * moves to inactive state or network type change)
+                                        * 1 = suspended;
+                                        * 0 = not suspended.
+                                        */
+} RIL_LceDataInfo;
 
 /* See RIL_REQUEST_LAST_CALL_FAIL_CAUSE */
 typedef enum {
@@ -1393,6 +1418,24 @@ typedef struct {
     /* true to enable the profile, 0 to disable, 1 to enable */
     int enabled;
 } RIL_DataProfileInfo;
+
+/* Tx Power Levels */
+#define RIL_NUM_TX_POWER_LEVELS     5
+
+typedef struct {
+
+  /* period (in ms) when modem is power collapsed */
+  uint32_t sleep_mode_time_ms;
+
+  /* period (in ms) when modem is awake and in idle mode*/
+  uint32_t idle_mode_time_ms;
+
+  /* period (in ms) for which Tx is active */
+  uint32_t tx_mode_time_ms[RIL_NUM_TX_POWER_LEVELS];
+
+  /* period (in ms) for which Rx is active */
+  uint32_t rx_mode_time_ms;
+} RIL_ActivityStatsInfo;
 
 /**
  * RIL_REQUEST_GET_SIM_STATUS
@@ -2590,6 +2633,9 @@ typedef struct {
  * Valid errors:
  *  SUCCESS
  *  RADIO_NOT_AVAILABLE
+ *  SS_MODIFIED_TO_DIAL
+ *  SS_MODIFIED_TO_USSD
+ *  SS_MODIFIED_TO_SS
  *  GENERIC_FAILURE
  *
  */
@@ -4048,6 +4094,7 @@ typedef struct {
  */
 #define RIL_REQUEST_SIM_TRANSMIT_APDU_BASIC 114
 
+#if 0
 /**
  * RIL_REQUEST_SIM_OPEN_CHANNEL
  *
@@ -4087,6 +4134,7 @@ typedef struct {
  *  GENERIC_FAILURE
  */
 #define RIL_REQUEST_SIM_CLOSE_CHANNEL 116
+#endif
 
 /**
  * RIL_REQUEST_SIM_TRANSMIT_APDU_CHANNEL
@@ -4183,7 +4231,6 @@ typedef struct {
  *
  * Selection/de-selection of a subscription from a SIM card
  * "data" is const  RIL_SelectUiccSub*
-
  *
  * "response" is NULL
  *
@@ -4253,6 +4300,7 @@ typedef struct {
 /**
  * RIL_REQUEST_GET_DC_RT_INFO
  *
+ * The request is DEPRECATED, use RIL_REQUEST_GET_ACTIVITY_INFO
  * Requests the Data Connection Real Time Info
  *
  * "data" is NULL
@@ -4271,6 +4319,7 @@ typedef struct {
 /**
  * RIL_REQUEST_SET_DC_RT_INFO_RATE
  *
+ * The request is DEPRECATED
  * This is the minimum number of milliseconds between successive
  * RIL_UNSOL_DC_RT_INFO_CHANGED messages and defines the highest rate
  * at which RIL_UNSOL_DC_RT_INFO_CHANGED's will be sent. A value of
@@ -4318,7 +4367,115 @@ typedef struct {
  */
 #define RIL_REQUEST_SHUTDOWN 129
 
-/* SAMSUNG REQUESTS */
+/**
+ * RIL_REQUEST_GET_RADIO_CAPABILITY
+ *
+ * Used to get phone radio capablility.
+ *
+ * "data" is the RIL_RadioCapability structure
+ *
+ * Valid errors:
+ *  SUCCESS
+ *  RADIO_NOT_AVAILABLE
+ *  GENERIC_FAILURE
+ */
+#define RIL_REQUEST_GET_RADIO_CAPABILITY 130
+
+/**
+ * RIL_REQUEST_SET_RADIO_CAPABILITY
+ *
+ * Used to set the phones radio capability. Be VERY careful
+ * using this request as it may cause some vendor modems to reset. Because
+ * of the possible modem reset any RIL commands after this one may not be
+ * processed.
+ *
+ * "data" is the RIL_RadioCapability structure
+ *
+ * "response" is the RIL_RadioCapability structure, used to feedback return status
+ *
+ * Valid errors:
+ *  SUCCESS means a RIL_UNSOL_RADIO_CAPABILITY will be sent within 30 seconds.
+ *  RADIO_NOT_AVAILABLE
+ *  GENERIC_FAILURE
+ */
+#define RIL_REQUEST_SET_RADIO_CAPABILITY 131
+
+/**
+ * RIL_REQUEST_START_LCE
+ *
+ * Start Link Capacity Estimate (LCE) service if supported by the radio.
+ *
+ * "data" is const int *
+ * ((const int*)data)[0] specifies the desired reporting interval (ms).
+ * ((const int*)data)[1] specifies the LCE service mode. 1: PULL; 0: PUSH.
+ *
+ * "response" is the RIL_LceStatusInfo.
+ *
+ * Valid errors:
+ * SUCCESS
+ * RADIO_NOT_AVAILABLE
+ * LCE_NOT_SUPPORTED
+ */
+#define RIL_REQUEST_START_LCE 132
+
+/**
+ * RIL_REQUEST_STOP_LCE
+ *
+ * Stop Link Capacity Estimate (LCE) service, the STOP operation should be
+ * idempotent for the radio modem.
+ *
+ * "response" is the RIL_LceStatusInfo.
+ *
+ * Valid errors:
+ * SUCCESS
+ * RADIO_NOT_AVAILABLE
+ * LCE_NOT_SUPPORTED
+ */
+#define RIL_REQUEST_STOP_LCE 133
+
+/**
+ * RIL_REQUEST_PULL_LCEDATA
+ *
+ * Pull LCE service for capacity information.
+ *
+ * "response" is the RIL_LceDataInfo.
+ *
+ * Valid errors:
+ * SUCCESS
+ * RADIO_NOT_AVAILABLE
+ * LCE_NOT_SUPPORTED
+ */
+#define RIL_REQUEST_PULL_LCEDATA 134
+
+/**
+ * RIL_REQUEST_GET_ACTIVITY_INFO
+ *
+ * Get modem activity statisitics info.
+ *
+ * There can be multiple RIL_REQUEST_GET_ACTIVITY_INFO calls to modem.
+ * Once the response for the request is sent modem will clear
+ * current statistics information.
+ *
+ * "data" is null
+ * "response" is const RIL_ActivityStatsInfo *
+ *
+ * Valid errors:
+ *
+ * SUCCESS
+ * RADIO_NOT_AVAILABLE (radio resetting)
+ * GENERIC_FAILURE
+ */
+#define RIL_REQUEST_GET_ACTIVITY_INFO 135
+
+/**********************************************************
+ * SAMSUNG REQUESTS
+ **********************************************************/
+
+/*
+ * You normally find these constants if you decompile RILConstants.class in
+ * framework2.odex.
+ */
+
 #define RIL_REQUEST_GET_CELL_BROADCAST_CONFIG 10002
 
 #define RIL_REQUEST_SEND_ENCODED_USSD 10005
@@ -4347,65 +4504,32 @@ typedef struct {
 #define RIL_REQUEST_SIM_CLOSE_CHANNEL 10028
 #define RIL_REQUEST_SIM_TRANSMIT_CHANNEL 10029
 #define RIL_REQUEST_SIM_AUTH 10030
-#define RIL_REQUEST_PS_ATTACH 10031
-#define RIL_REQUEST_PS_DETACH 10032
-#define RIL_REQUEST_ACTIVATE_DATA_CALL 10033
-#define RIL_REQUEST_CHANGE_SIM_PERSO 10034
-#define RIL_REQUEST_ENTER_SIM_PERSO 10035
-#define RIL_REQUEST_GET_TIME_INFO 10036
-#define RIL_REQUEST_OMADM_SETUP_SESSION 10037
-#define RIL_REQUEST_OMADM_SERVER_START_SESSION 10038
-#define RIL_REQUEST_OMADM_CLIENT_START_SESSION 10039
-#define RIL_REQUEST_OMADM_SEND_DATA 10040
-#define RIL_REQUEST_CDMA_GET_DATAPROFILE 10041
-#define RIL_REQUEST_CDMA_SET_DATAPROFILE 10042
-#define RIL_REQUEST_CDMA_GET_SYSTEMPROPERTIES 10043
-#define RIL_REQUEST_CDMA_SET_SYSTEMPROPERTIES 10044
-#define RIL_REQUEST_SEND_SMS_COUNT 10045
-#define RIL_REQUEST_SEND_SMS_MSG 10046
-#define RIL_REQUEST_SEND_SMS_MSG_READ_STATUS 10047
-#define RIL_REQUEST_MODEM_HANGUP 10048
-#define RIL_REQUEST_SET_SIM_POWER 10049
-#define RIL_REQUEST_SET_PREFERRED_NETWORK_LIST 10050
-#define RIL_REQUEST_GET_PREFERRED_NETWORK_LIST 10051
-#define RIL_REQUEST_HANGUP_VT 10052
-
-/***********************************************************************/
-
-/**
- * RIL_REQUEST_GET_RADIO_CAPABILITY
- *
- * Used to get phone radio capablility.
- *
- * "data" is int *
- * ((int *)data)[0] is the phone radio access family defined in
- * RadioAccessFamily. It's a bit mask value to represent the support type.
- *
- * Valid errors:
- *  SUCCESS
- *  RADIO_NOT_AVAILABLE
- *  GENERIC_FAILURE
- */
-#define RIL_REQUEST_GET_RADIO_CAPABILITY 130
-
-/**
- * RIL_REQUEST_SET_RADIO_CAPABILITY
- *
- * Used to set the phones radio capability. Be VERY careful
- * using this request as it may cause some vendor modems to reset. Because
- * of the possible modem reset any RIL commands after this one may not be
- * processed.
- *
- * "data" is the RIL_RadioCapability structure
- *
- * "response" is the RIL_RadioCapability structure, used to feedback return status
- *
- * Valid errors:
- *  SUCCESS means a RIL_UNSOL_RADIO_CAPABILITY will be sent within 30 seconds.
- *  RADIO_NOT_AVAILABLE
- *  GENERIC_FAILURE
- */
-#define RIL_REQUEST_SET_RADIO_CAPABILITY 131
+#define RIL_REQUEST_MODIFY_CALL_INITIATE 10031
+#define RIL_REQUEST_MODIFY_CALL_CONFIRM 10032
+#define RIL_REQUEST_SAFE_MODE 10033
+#define RIL_REQUEST_SET_VOICE_DOMAIN_PREF 10034
+#define RIL_REQUEST_PS_ATTACH 10035
+#define RIL_REQUEST_PS_DETACH 10036
+#define RIL_REQUEST_ACTIVATE_DATA_CALL 10037
+#define RIL_REQUEST_CHANGE_SIM_PERSO 10038
+#define RIL_REQUEST_ENTER_SIM_PERSO 10039
+#define RIL_REQUEST_GET_TIME_INFO 10040
+#define RIL_REQUEST_OMADM_SETUP_SESSION 10042
+#define RIL_REQUEST_OMADM_SERVER_START_SESSION 10043
+#define RIL_REQUEST_OMADM_CLIENT_START_SESSION 10044
+#define RIL_REQUEST_OMADM_SEND_DATA 10045
+#define RIL_REQUEST_CDMA_GET_DATAPROFILE 10046
+#define RIL_REQUEST_CDMA_SET_DATAPROFILE 10047
+#define RIL_REQUEST_CDMA_GET_SYSTEMPROPERTIES 10048
+#define RIL_REQUEST_CDMA_SET_SYSTEMPROPERTIES 10049
+#define RIL_REQUEST_SEND_SMS_COUNT 10050
+#define RIL_REQUEST_SEND_SMS_MSG 10051
+#define RIL_REQUEST_SEND_SMS_MSG_READ_STATUS 10052
+#define RIL_REQUEST_MODEM_HANGUP 10053
+#define RIL_REQUEST_SET_SIM_POWER 10054
+#define RIL_REQUEST_SET_PREFERRED_NETWORK_LIST 10055
+#define RIL_REQUEST_GET_PREFERRED_NETWORK_LIST 10056
+#define RIL_REQUEST_HANGUP_VT 10057
 
 
 /***********************************************************************/
@@ -4938,7 +5062,6 @@ typedef struct {
  * ((int *)data)[0] is of type const RIL_SrvccState
  *
  */
-
 #define RIL_UNSOL_SRVCC_STATE_NOTIFY 1039
 
 /**
@@ -4954,6 +5077,7 @@ typedef struct {
 /**
  * RIL_UNSOL_DC_RT_INFO_CHANGED
  *
+ * The message is DEPRECATED, use RIL_REQUEST_GET_ACTIVITY_INFO
  * Sent when the DC_RT_STATE changes but the time
  * between these messages must not be less than the
  * value set by RIL_REQUEST_SET_DC_RT_RATE.
@@ -4962,43 +5086,6 @@ typedef struct {
  *
  */
 #define RIL_UNSOL_DC_RT_INFO_CHANGED 1041
-
-/* SAMSUNG RESPONSE */
-#define SAMSUNG_UNSOL_RESPONSE_BASE 11000
-
-#define RIL_UNSOL_RELEASE_COMPLETE_MESSAGE 11001
-#define RIL_UNSOL_STK_SEND_SMS_RESULT 11002
-#define RIL_UNSOL_STK_CALL_CONTROL_RESULT 11003
-#define RIL_UNSOL_DUN_CALL_STATUS 11004
-
-#define RIL_UNSOL_O2_HOME_ZONE_INFO 11007
-#define RIL_UNSOL_DEVICE_READY_NOTI 11008
-#define RIL_UNSOL_GPS_NOTI 11009
-#define RIL_UNSOL_AM 11010
-#define RIL_UNSOL_DUN_PIN_CONTROL_SIGNAL 11011
-#define RIL_UNSOL_DATA_SUSPEND_RESUME 11012
-#define RIL_UNSOL_SAP 11013
-
-#define RIL_UNSOL_SIM_SMS_STORAGE_AVAILALE 11015
-#define RIL_UNSOL_HSDPA_STATE_CHANGED 11016
-#define RIL_UNSOL_WB_AMR_STATE 11017
-#define RIL_UNSOL_TWO_MIC_STATE 11018
-#define RIL_UNSOL_DHA_STATE 11019
-#define RIL_UNSOL_UART 11020
-#define RIL_UNSOL_RESPONSE_HANDOVER 11021
-#define RIL_UNSOL_IPV6_ADDR 11022
-#define RIL_UNSOL_NWK_INIT_DISC_REQUEST 11023
-#define RIL_UNSOL_RTS_INDICATION 11024
-#define RIL_UNSOL_OMADM_SEND_DATA 11025
-#define RIL_UNSOL_DUN 11026
-#define RIL_UNSOL_SYSTEM_REBOOT 11027
-#define RIL_UNSOL_VOICE_PRIVACY_CHANGED 11028
-#define RIL_UNSOL_UTS_GETSMSCOUNT 11029
-#define RIL_UNSOL_UTS_GETSMSMSG 11030
-#define RIL_UNSOL_UTS_GET_UNREAD_SMS_STATUS 11031
-#define RIL_UNSOL_MIP_CONNECT_STATUS 11032
-
-/***********************************************************************/
 
 /**
  * RIL_UNSOL_RADIO_CAPABILITY
@@ -5033,8 +5120,62 @@ typedef struct {
  */
 #define RIL_UNSOL_STK_CC_ALPHA_NOTIFY 1044
 
+/**
+ * RIL_UNSOL_LCEDATA_RECV
+ *
+ * Called when there is an incoming Link Capacity Estimate (LCE) info report.
+ *
+ * "data" is the RIL_LceDataInfo structure.
+ *
+ */
+#define RIL_UNSOL_LCEDATA_RECV 1045
+
 /***********************************************************************/
 
+/**********************************************************
+ * SAMSUNG RESPONSE
+ **********************************************************/
+
+#define SAMSUNG_UNSOL_RESPONSE_BASE 11000
+
+#define RIL_UNSOL_RELEASE_COMPLETE_MESSAGE 11001
+#define RIL_UNSOL_STK_SEND_SMS_RESULT 11002
+#define RIL_UNSOL_STK_CALL_CONTROL_RESULT 11003
+#define RIL_UNSOL_DUN_CALL_STATUS 11004
+
+#define RIL_UNSOL_O2_HOME_ZONE_INFO 11007
+#define RIL_UNSOL_DEVICE_READY_NOTI 11008
+#define RIL_UNSOL_GPS_NOTI 11009
+#define RIL_UNSOL_AM 11010
+#define RIL_UNSOL_DUN_PIN_CONTROL_SIGNAL 11011
+#define RIL_UNSOL_DATA_SUSPEND_RESUME 11012
+#define RIL_UNSOL_SAP 11013
+
+#define RIL_UNSOL_SIM_SMS_STORAGE_AVAILALE 11015
+#define RIL_UNSOL_HSDPA_STATE_CHANGED 11016
+#define RIL_UNSOL_WB_AMR_STATE 11017
+#define RIL_UNSOL_TWO_MIC_STATE 11018
+#define RIL_UNSOL_DHA_STATE 11019
+#define RIL_UNSOL_UART 11020
+#define RIL_UNSOL_SIM_PB_READY 11021
+#define RIL_UNSOL_RESPONSE_HANDOVER 11038
+#define RIL_UNSOL_IPV6_ADDR 11039
+#define RIL_UNSOL_NWK_INIT_DISC_REQUEST 11040
+#define RIL_UNSOL_RTS_INDICATION 11041
+#define RIL_UNSOL_OMADM_SEND_DATA 11046
+#define RIL_UNSOL_DUN 11047
+#define RIL_UNSOL_SYSTEM_REBOOT 11048
+#define RIL_UNSOL_VOICE_PRIVACY_CHANGED 11049
+#define RIL_UNSOL_UTS_GETSMSCOUNT 11050
+#define RIL_UNSOL_UTS_GETSMSMSG 11051
+#define RIL_UNSOL_UTS_GET_UNREAD_SMS_STATUS 11052
+#define RIL_UNSOL_MIP_CONNECT_STATUS 11053
+
+/* SNDMGR */
+
+#define RIL_UNSOL_SNDMGR_WB_AMR_REPORT 20017
+
+/***********************************************************************/
 
 #if defined(ANDROID_MULTI_SIM)
 /**

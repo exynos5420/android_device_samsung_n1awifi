@@ -322,7 +322,4 @@
          autodetected from the Configuration. -->
     <bool name="config_showNavigationBar">false</bool>
 
-    <!-- Is the device LTE capable -->
-    <bool name="config_lte_capable">false</bool>
-
 </resources>

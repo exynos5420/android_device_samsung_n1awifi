@@ -3,8 +3,8 @@
 /dev/ttySAC0            u:object_r:hci_attach_dev:s0
 /dev/ttySAC1            u:object_r:gps_device:s0
 /dev/ttySAC2            u:object_r:radio_device:s0
-/dev/s5p-smem           u:object_r:secmem_device:s0
-/dev/ump                u:object_r:ump_device:s0
+#/dev/s5p-smem           u:object_r:secmem_device:s0
+#/dev/ump                u:object_r:ump_device:s0
 
 /dev/mobicore           u:object_r:tee_device:s0
 /dev/mobicore-user      u:object_r:tee_device:s0
@@ -36,8 +36,8 @@
 /data/app/tlcd_sock     u:object_r:drmserver_socket:s0
 
 /data/.wifiver.info     u:object_r:wifi_data_file:s0
-/efs/wifi(/.*)?         u:object_r:wifi_efs_file:s0
-/efs/wifi/.mac.info     u:object_r:wifi_efs_file:s0
+#/efs/wifi(/.*)?         u:object_r:wifi_efs_file:s0
+#/efs/wifi/.mac.info     u:object_r:wifi_efs_file:s0
 /system/bin/macloader   u:object_r:macloader_exec:s0
 
 /system/bin/mcDriverDaemon  --  u:object_r:tee_exec:s0
@@ -45,7 +45,7 @@
 
 /sys/devices/platform/bcm4339_bluetooth/rfkill/rfkill0/state -- u:object_r:sysfs_bluetooth_writable:s0
 /sys/devices/platform/bcm4339_bluetooth/rfkill/rfkill0/type -- u:object_r:sysfs_bluetooth_writable:s0
-/sys/devices/virtual/sec/sec_touchkey/tsp_keys_enabled u:object_r:sysfs_input_file:s0
+#/sys/devices/virtual/sec/sec_touchkey/tsp_keys_enabled u:object_r:sysfs_input_file:s0
 
 /efs/FactoryApp(/.*)?   u:object_r:efs_file:s0
 /efs/imei               u:object_r:efs_file:s0

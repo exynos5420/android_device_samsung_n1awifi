@@ -22,7 +22,7 @@ LOCAL_PATH := device/samsung/lt033g
 # Platform
 BOARD_VENDOR := samsung
 TARGET_BOARD_PLATFORM := exynos5
-TARGET_SLSI_VARIANT := insignal
+TARGET_SLSI_VARIANT := cm
 TARGET_SOC := exynos5420
 
 # Architecture
@@ -33,7 +33,7 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a15
 
 # Bionic Tuning
-TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
+#TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -46,6 +46,7 @@ TARGET_OTA_ASSERT_DEVICE := lt033g,lt03wifi,lt03wifiue
 
 # Camera
 BOARD_NEEDS_MEMORYHEAPION := true
+#BOARD_USE_SAMSUNG_CAMERAFORMAT_NV21 := true
 COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_DVFS
@@ -55,33 +56,39 @@ BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_CONFIG := cyanogenmod_lt033g_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/lt033g
+BOARD_KERNEL_CMDLINE += enforcing=0
 
 # Charger/Healthd
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
-CHARGING_ENABLED_PATH := "/sys/class/power_supply/battery/batt_lp_charging"
 BACKLIGHT_PATH := "/sys/class/backlight/panel/brightness"
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := universal5420
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
+TARGET_BOOTLOADER_BOARD_NAME := universal5420
 
 # FIMG2D
 BOARD_USES_SKIA_FIMGAPI := true
+BOARD_USES_NEON_BLITANTIH := true
+BOARD_USES_FIMGAPI_V4L2 := false
 
 # Graphics
-BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl/egl.cfg
 OVERRIDE_RS_DRIVER := libRSDriverArm.so
 USE_OPENGL_RENDERER := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+
+# Exynos display
+BOARD_USES_VIRTUAL_DISPLAY := true
 
 # HWCServices
 BOARD_USES_HWC_SERVICES := true
 
 # SCALER
 BOARD_USES_SCALER := true
+
+BOARD_USES_GSC_VIDEO := true
 
 # Include path
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
@@ -105,14 +112,18 @@ BOARD_USE_CSC_HW := true
 BOARD_USE_QOS_CTRL := false
 BOARD_USE_S3D_SUPPORT := true
 BOARD_USE_VP8ENC_SUPPORT := true
-# Old openmax repo
-BOARD_USE_H264_PREPEND_SPS_PPS := false
-BOARD_USE_ENCODER_RGBINPUT_SUPPORT := true
-BOARD_USE_DUALDPB_MODE := true
+
+# HEVC support in libvideocodec
+#BOARD_USE_HEVC_HWIP := true
+#BOARD_USE_HEVCDEC_SUPPORT := true
+
+# Sensors
+TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
 # MP3/WMA support
-BOARD_USE_ALP_AUDIO := true
-BOARD_USE_WMA_CODEC := true
+#BOARD_USE_ALP_AUDIO := true
+#BOARD_USE_SEIREN_AUDIO := true
+#BOARD_USE_WMA_CODEC := true
 
 # Samsung Gralloc
 TARGET_SAMSUNG_GRALLOC_EXTERNAL_USECASES := true
@@ -132,11 +143,17 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2524971008
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 12863913984
 BOARD_FLASH_BLOCK_SIZE := 4096
 
+#TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
+
 # Disable journaling on system.img to save space
 BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
 
 # PowerHAL
 TARGET_POWERHAL_VARIANT := universal5420
+
+# Enable dex-preoptimization to speed up first boot sequence
+WITH_DEXPREOPT := true
 
 # UMS
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun%d/file
@@ -145,37 +162,9 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storag
 BOARD_HAS_LARGE_FILESYSTEM := true
 
 # Recovery
-COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
-BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
-BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.universal5420
-TARGET_RECOVERY_PIXEL_FORMAT := BGRA_8888
-TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
-BOARD_RECOVERY_SWIPE := true
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
 
-# SELinux
-BOARD_SEPOLICY_DIRS += \
-    device/samsung/lt033g/sepolicy
-
-BOARD_SEPOLICY_UNION += \
-    file_contexts \
-    device.te \
-    domain.te \
-    drmserver.te \
-    file.te \
-    gpsd.te \
-    macloader.te \
-    mediaserver.te \
-    service_contexts \
-    servicemanager.te \
-    system_app.te \
-    system_server.te \
-    wpa.te \
-    rild.te \
-    vold.te \
-    cpboot-daemon.te
+#BOARD_HAS_NO_SELECT_BUTTON := true
 
 # Webkit
 ENABLE_WEBGL := true
@@ -186,6 +175,9 @@ BOARD_USES_WFD := true
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 BOARD_ANT_WIRELESS_POWER := "bluedroid"
+
+# Keymaster
+BOARD_USES_TRUST_KEYMASTER := true
 
 # Wifi
 BOARD_HAVE_SAMSUNG_WIFI          := true
@@ -201,3 +193,7 @@ WIFI_DRIVER_FW_PATH_AP           := "/system/etc/wifi/bcmdhd_apsta.bin"
 WIFI_DRIVER_NVRAM_PATH_PARAM     := "/sys/module/dhd/parameters/nvram_path"
 WIFI_DRIVER_NVRAM_PATH           := "/system/etc/wifi/nvram_net.txt"
 WIFI_BAND                        := 802_11_ABG
+
+# SELinux
+BOARD_SEPOLICY_DIRS := \
+    device/samsung/lt033g/sepolicy

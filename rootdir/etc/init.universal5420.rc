@@ -5,35 +5,12 @@ import init.universal5420.wifi.rc
 
 on init
 
-    # Set permissions for persist partition
-    mkdir /mnt/shell/emulated 0700 shell shell
-    mkdir /mnt/shell/container 0700 system system
-    mkdir /storage 0551 system sdcard_r
-    mkdir /storage/emulated 0555 root root
-
-    #External storage directories
-    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
-    mkdir /storage/usbdisk 0000 system system
-    mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
-
-    mkdir /storage/sdcard1 0700 root root
-    mkdir /storage/usbdisk 0700 root root
-
-    export EXTERNAL_STORAGE /storage/emulated/legacy
-    export SECONDARY_STORAGE /storage/sdcard1:/storage/usbdisk
-    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
-    export EMULATED_STORAGE_TARGET /storage/emulated
-
     # Support legacy paths
-    symlink /storage/emulated/legacy /sdcard
-    symlink /storage/emulated/legacy /mnt/sdcard
-    symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
-    symlink /mnt/shell/container /storage/container
-    symlink /storage/sdcard1 /extSdCard
-    symlink /storage/sdcard1 /mnt/extSdCard
-    symlink /storage/sdcard1 /external_sd
-    symlink /storage/usbdisk /usbdisk
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
+    symlink /sdcard1 /storage/sdcard1
+    symlink /sdcard1 /mnt/extSdCard
+    symlink /sdcard1 /external_sd
     symlink /storage/usbdisk /mnt/usbdisk
 
     symlink /data/app /factory
@@ -48,6 +25,7 @@ on init
     symlink /dev/block/mmcblk0p8 /dev/block/param
 
 on early-init
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
     write /sys/block/mmcblk0/queue/read_ahead_kb 512
     write /sys/block/mmcblk1/queue/read_ahead_kb 512
 
@@ -62,10 +40,6 @@ on property:sys.boot_completed=1
     setprop sys.io.scheduler bfq
 
 on post-fs-data
-    # we will remap this as /mnt/sdcard with the sdcard fuse tool
-    mkdir /data/media 0770 media_rw media_rw
-    chown media_rw media_rw /data/media
-
     setprop vold.post_fs_data_done 1
 
 # Permissions for bluetooth
@@ -100,7 +74,7 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     oneshot
 
 on boot
-    mount debugfs /sys/kernel/debug /sys/kernel/debug
+
     setprop ro.radio.noril no
     start ril-daemon
 
@@ -395,7 +369,6 @@ on fs
     mkdir /preload 0771 system system
 
     mount_all /fstab.universal5420
-    setprop ro.crypto.fuse_sdcard true
 
     chown radio system /efs
     chmod 0771 /efs
@@ -471,23 +444,18 @@ on fs
     chmod 0644 /sys/class/timed_output/vibrator/pwm_threshold
     chown system system /sys/class/timed_output/vibrator/pwm_threshold
 
-# virtual sdcard daemon running as media_rw (1023)
-service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
-    class late_start
-
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 /mnt/media_rw/sdcard1 /storage/sdcard1
-    class late_start
-    disabled
-
-service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -w 1023 /mnt/media_rw/usbdisk /storage/usbdisk
-    class late_start
-    disabled
-
 on property:ro.fuse_sdcard=true
     start sdcard
 
 service charger /charger
     class charger
+
+# ExyRng startup
+service exyrngd /system/bin/exyrngd -b
+    user root
+    group root
+    class main
+    oneshot
 
 # Set watchdog timer to 30 seconds and pet it every 10 seconds to get a 20 second margin
 service watchdogd /sbin/watchdogd 10 20
