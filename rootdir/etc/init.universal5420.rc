@@ -4,6 +4,7 @@ import init.carrier.rc
 import init.universal5420.wifi.rc
 
 on init
+    export LD_PRELOAD "/system/lib/libsamsung_symbols.so"
 
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
