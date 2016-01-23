@@ -14,10 +14,10 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := device/samsung/lt033g
+LOCAL_PATH := device/samsung/lt03wifi
 
 # inherit from the proprietary version
--include vendor/samsung/lt033g/BoardConfigVendor.mk
+-include vendor/samsung/lt03wifi/BoardConfigVendor.mk
 
 # Platform
 BOARD_VENDOR := samsung
@@ -54,8 +54,8 @@ COMMON_GLOBAL_CFLAGS += -DSAMSUNG_DVFS
 # Kernel
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
-TARGET_KERNEL_CONFIG := cyanogenmod_lt033g_defconfig
-TARGET_KERNEL_SOURCE := kernel/samsung/lt033g
+TARGET_KERNEL_CONFIG := cyanogenmod_lt03wifi_defconfig
+TARGET_KERNEL_SOURCE := kernel/samsung/lt03wifi
 #BOARD_KERNEL_CMDLINE += enforcing=0
 
 # Charger/Healthd
@@ -94,7 +94,7 @@ BOARD_USES_GSC_VIDEO := true
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 # Hardware
-BOARD_HARDWARE_CLASS += device/samsung/lt033g/cmhw
+BOARD_HARDWARE_CLASS += device/samsung/lt03wifi/cmhw
 
 # Samsung LSI OpenMAX
 COMMON_GLOBAL_CFLAGS += -DUSE_NATIVE_SEC_NV12TILED # use format from fw/native
@@ -131,7 +131,7 @@ TARGET_SAMSUNG_GRALLOC_EXTERNAL_USECASES := true
 # Modem
 BOARD_PROVIDES_LIBRIL := true
 BOARD_MODEM_TYPE := xmm6262
-BOARD_RIL_CLASS := ../../../device/samsung/lt033g/ril
+BOARD_RIL_CLASS := ../../../device/samsung/lt03wifi/ril
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
@@ -196,4 +196,4 @@ WIFI_BAND                        := 802_11_ABG
 
 # SELinux
 BOARD_SEPOLICY_DIRS := \
-    device/samsung/lt033g/sepolicy
+    device/samsung/lt03wifi/sepolicy

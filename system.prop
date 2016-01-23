@@ -1,6 +1,6 @@
 
 # Modem
-ro.telephony.ril_class=lt033gRIL
+ro.telephony.ril_class=lt03wifiRIL
 rild.libpath=/system/lib/libsec-ril.so
 rild.libargs=-d /dev/ttyS0
 ro.ril.hsxpa=1

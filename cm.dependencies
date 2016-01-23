@@ -1,15 +1,15 @@
 [
     {
         "remote": "github",
-        "repository": "ShevT/kernel_samsung_lt033g",
+        "repository": "ShevT/kernel_samsung_lt03wifi",
         "revision": "cm-13.0",
-        "target_path": "kernel/samsung/lt033g"
+        "target_path": "kernel/samsung/lt03wifi"
     },
     {
         "remote": "github",
-        "repository": "ShevT/vendor_samsung_lt033g",
+        "repository": "ShevT/vendor_samsung_lt03wifi",
         "revision": "cm-13.0",
-        "target_path": "vendor/samsung/lt033g"
+        "target_path": "vendor/samsung/lt03wifi"
     },
     {
         "remote": "github",

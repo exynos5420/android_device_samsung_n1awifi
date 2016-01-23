@@ -1,13 +1,13 @@
-$(call inherit-product, device/samsung/lt033g/full_lt033g.mk)
+$(call inherit-product, device/samsung/lt03wifi/full_lt03wifi.mk)
 
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-PRODUCT_NAME := cm_lt033g
-PRODUCT_DEVICE := lt033g
+PRODUCT_NAME := cm_lt03wifi
+PRODUCT_DEVICE := lt03wifi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_MODEL=SM-P601 \
-    PRODUCT_NAME=lt033g \
-    PRODUCT_DEVICE=lt033g \
-    TARGET_DEVICE=lt033g
+    PRODUCT_MODEL=SM-P600 \
+    PRODUCT_NAME=lt03wifi \
+    PRODUCT_DEVICE=lt03wifi \
+    TARGET_DEVICE=lt03wifi
