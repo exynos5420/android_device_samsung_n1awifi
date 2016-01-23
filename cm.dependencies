@@ -27,7 +27,7 @@
         "remote": "github",
         "repository": "CyanogenMod/hardware_samsung_slsi-cm_exynos5",
         "revision": "cm-13.0",
-        "target_path": "hardware/samsung_slsi-cm/exynos5-insignal"
+        "target_path": "hardware/samsung_slsi-cm/exynos5"
     },
     {
         "remote": "github",
