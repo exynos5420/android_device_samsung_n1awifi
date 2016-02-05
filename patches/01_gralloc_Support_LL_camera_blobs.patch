@@ -1,0 +1,17 @@
+The LL gralloc needs an increased sNumInts value or it will fail with an 'invalid gralloc handle'.
+https://github.com/CyanogenMod/android_hardware_samsung_slsi-cm_exynos5420/commit/ccd42cc2e7f1beb104ce6e24a8e16edde3786658
+
+project hardware/samsung_slsi-cm/exynos5420/
+diff --git a/hardware/samsung_slsi-cm/exynos5420/include/gralloc_priv.h b/hardware/samsung_slsi-cm/exynos5420/include/gralloc_priv.h
+index 1e51f31..43422df 100755
+--- a/hardware/samsung_slsi-cm/exynos5420/include/gralloc_priv.h
++++ b/hardware/samsung_slsi-cm/exynos5420/include/gralloc_priv.h
+@@ -101,7 +101,7 @@ struct private_handle_t {
+ 
+ #ifdef __cplusplus
+     static const int sNumFds = 3;
+-    static const int sNumInts = 15;
++    static const int sNumInts = 20;
+     static const int sMagic = 0x3141592;
+ 
+     private_handle_t(int fd, int size, int flags) :

@@ -1,0 +1,24 @@
+Only log non-null invalid pointers
+This prevents the endless logspam of 0x0 pointers during animations such as
+an indeterminate progress dialog
+
+https://github.com/CyanogenMod/android_hardware_samsung_slsi-cm_exynos5433/commit/aa3abb964b919bf05cc4ec6f0f4eaf5638e599ab
+
+project hardware/samsung_slsi-cm/exynos5420/
+diff --git a/hardware/samsung_slsi-cm/exynos5420/include/gralloc_priv.h b/hardware/samsung_slsi-cm/exynos5420/include/gralloc_priv.h
+index 1e51f31..3fba2f1 100755
+--- a/hardware/samsung_slsi-cm/exynos5420/include/gralloc_priv.h
++++ b/hardware/samsung_slsi-cm/exynos5420/include/gralloc_priv.h
+@@ -160,7 +160,11 @@ struct private_handle_t {
+             hnd->numInts + hnd->numFds != sNumInts + sNumFds ||
+             hnd->magic != sMagic)
+         {
+-            ALOGE("invalid gralloc handle (at %p)", reinterpret_cast<void *>(const_cast<native_handle *>(h)));
++            void *handle = reinterpret_cast<void *>(const_cast<native_handle *>(h));
++            if(handle != 0)
++            {
++                ALOGE("invalid gralloc handle (at %p)", handle);
++            }
+             return -EINVAL;
+         }
+         return 0;

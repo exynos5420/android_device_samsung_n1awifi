@@ -1,0 +1,32 @@
+https://github.com/CyanogenMod/android_hardware_samsung_slsi-cm_exynos5433/commit/81032656a0b1e750148787fda813d46a2540caf9
+
+project hardware/samsung_slsi-cm/exynos5420/
+diff --git a/hardware/samsung_slsi-cm/exynos5420/mobicore/common/LogWrapper/log.h b/hardware/samsung_slsi-cm/exynos5420/mobicore/common/LogWrapper/log.h
+index 7e5847f..95149ef 100644
+--- a/hardware/samsung_slsi-cm/exynos5420/mobicore/common/LogWrapper/log.h
++++ b/hardware/samsung_slsi-cm/exynos5420/mobicore/common/LogWrapper/log.h
+@@ -78,8 +78,8 @@
+     #define LOG_W(fmt, args...) DUMMY_FUNCTION()
+ #else
+     // add LINE
+-    #define LOG_I(fmt, args...) LOG_i(fmt";%d", ## args, __LINE__)
+-    #define LOG_W(fmt, args...) LOG_w(fmt";%d", ## args, __LINE__)
++    #define LOG_I(fmt, args...) LOG_i(fmt ";%d", ## args, __LINE__)
++    #define LOG_W(fmt, args...) LOG_w(fmt ";%d", ## args, __LINE__)
+ #endif
+     // LOG_E is always defined
+     #define _LOG_E(fmt, args...) LOG_e(fmt, ## args)
+@@ -108,10 +108,10 @@
+     #define LOG_I(fmt, ...) DUMMY_FUNCTION()
+     #define LOG_W(fmt, ...) DUMMY_FUNCTION()
+ #else
+-    #define LOG_I(...)  _LOG_x("I",__VA_ARGS__)
+-    #define LOG_W(...)  _LOG_x("W",__VA_ARGS__)
++    #define LOG_I(...)  _LOG_x("I", __VA_ARGS__)
++    #define LOG_W(...)  _LOG_x("W", __VA_ARGS__)
+ #endif
+-    #define _LOG_E(...)  _LOG_x("E",__VA_ARGS__)
++    #define _LOG_E(...)  _LOG_x("E", __VA_ARGS__)
+ 
+     #define LOG_i(...) printf(__VA_ARGS__)
+ 	#define LOG_w(...) printf(__VA_ARGS__)
