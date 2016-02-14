@@ -305,7 +305,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_height=4096 \
     ro.hwui.fbo_cache_size=16
 
-$(call inherit-product-if-exists, build/target/product/full.mk)
+$(call inherit-product-if-exists, build/target/product/full_base.mk)
 $(call inherit-product, hardware/samsung_slsi-cm/exynos5420/exynos5420.mk)
 # call the proprietary setup
 $(call inherit-product, vendor/samsung/lt03wifi/lt03wifi-vendor.mk)
