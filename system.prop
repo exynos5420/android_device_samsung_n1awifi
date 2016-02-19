@@ -1,9 +1,0 @@
-
-# Modem
-ro.telephony.ril_class=lt03wifiRIL
-rild.libpath=/system/lib/libsec-ril.so
-rild.libargs=-d /dev/ttyS0
-ro.ril.hsxpa=1
-ro.ril.gprsclass=10
-telephony.lteOnGsmDevice=0
-ro.ril.telephony.mqanelements=5
