@@ -59,7 +59,7 @@ BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_CONFIG := cyanogenmod_lt03wifi_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/lt03wifi
-#BOARD_KERNEL_CMDLINE += enforcing=0
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
 # Charger/Healthd
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
