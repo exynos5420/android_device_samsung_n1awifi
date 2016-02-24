@@ -218,10 +218,6 @@ PRODUCT_PACKAGES += \
     CellBroadcastReceiver \
     SamsungServiceMode
 
-# Recovery
-PRODUCT_PACKAGES += \
-    init.recovery.universal5420.rc
-
 # Bluetooth
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
