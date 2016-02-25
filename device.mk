@@ -212,9 +212,9 @@ PRODUCT_PACKAGES += \
     libsecril-client-sap \
     cbd
 
-PRODUCT_PACKAGES += \
-    CellBroadcastReceiver \
-    SamsungServiceMode
+#PRODUCT_PACKAGES += \
+#    CellBroadcastReceiver \
+#    SamsungServiceMode
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
