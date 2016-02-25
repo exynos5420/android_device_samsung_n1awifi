@@ -1,6 +1,5 @@
 import init.universal5420.usb.rc
 import init.samsung.rc
-import init.carrier.rc
 import init.universal5420.wifi.rc
 
 on init
