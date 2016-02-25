@@ -393,6 +393,10 @@ on fs
 # Permissions for backlight
     chown system system /sys/class/backlight/panel/brightness
 
+# Permissions for torch
+    chown system camera /sys/class/leds/torch-sec1/brightness
+    chmod 0660 /sys/class/leds/torch-sec1/brightness
+
 # Permissions for LCD
     chown system radio /sys/class/lcd/panel/lcd_type
 
