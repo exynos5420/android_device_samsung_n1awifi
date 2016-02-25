@@ -18,9 +18,6 @@ LOCAL_PATH := device/samsung/lt03wifi
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-# The gps config appropriate for this device
-#$(call inherit-product, device/common/gps/gps_eu_supl.mk)
-
 PRODUCT_CHARACTERISTICS := tablet
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
@@ -94,8 +91,11 @@ PRODUCT_PACKAGES += \
     setup_fs
 
 # GPS
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/gps/gps.conf:system/etc/gps.conf \
+    $(LOCAL_PATH)/configs/gps/gps.xml:system/etc/gps.xml
+
 PRODUCT_PACKAGES += \
-    gps.universal5420 \
     libdmitry
 
 # Touchscreen
