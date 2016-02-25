@@ -253,6 +253,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapminfree=2m \
     dalvik.vm.heapmaxfree=8m \
 
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    ro.sys.fw.dex2oat_thread_count=4
+
 # HWUI CACHES
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.texture_cache_size=96 \
