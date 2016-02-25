@@ -236,9 +236,11 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.adb.secure=0 \
     persist.adb.notify=0 \
     ro.secure=0 \
-    persist.sys.root_access=3 \
     ro.debuggable=1 \
     persist.service.adb.enable=1
+
+ADDITIONAL_BUILD_PROPERTIES += \
+    persist.sys.root_access=3
 
 # Fast mass storage
 PRODUCT_PROPERTY_OVERRIDES += \
