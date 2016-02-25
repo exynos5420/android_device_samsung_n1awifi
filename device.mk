@@ -28,16 +28,13 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 PRODUCT_PACKAGES += \
-    libion \
-    libcec
+    libion
 
 PRODUCT_PACKAGES += \
     libstlport
 
 PRODUCT_PACKAGES += \
-    hwcomposer.exynos5 \
-    gralloc.exynos5 \
-    memtrack.exynos5
+    gralloc.exynos5
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320 \
@@ -131,42 +128,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.isUsbOtgEnabled=true
-
-# MobiCore setup
-PRODUCT_PACKAGES += \
-    mcDriverDaemon \
-    libMcClient \
-    libMcRegistry \
-    libgdmcprov
-
 # Network tools
 PRODUCT_PACKAGES += \
     libpcap \
     tcpdump
 
-### OMX
-# Stagefright and device specific modules
-PRODUCT_PACKAGES += \
-    libstagefrighthw \
-    libExynosOMX_Core \
-    libcsc
-
-# Audio codecs
-#PRODUCT_PACKAGES += \
-#    libOMX.Exynos.AAC.Decoder \
-#    libOMX.Exynos.FLAC.Decoder \
-#    libOMX.Exynos.MP3.Decoder
-
 # Video codecs
 PRODUCT_PACKAGES += \
-    libOMX.Exynos.AVC.Decoder \
-    libOMX.Exynos.AVC.Encoder \
-    libOMX.Exynos.HEVC.Decoder \
-    libOMX.Exynos.MPEG4.Decoder \
-    libOMX.Exynos.MPEG4.Encoder \
-    libOMX.Exynos.VP8.Decoder \
     libOMX.Exynos.WMV.Decoder
 
 # Permissions
