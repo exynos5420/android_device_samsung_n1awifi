@@ -67,6 +67,9 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 BACKLIGHT_PATH := "/sys/class/backlight/panel/brightness"
 
+# Build the platform with Clang
+USE_CLANG_PLATFORM_BUILD := true
+
 # We use our lights hal
 TARGET_PROVIDES_LIBLIGHT := true
 
