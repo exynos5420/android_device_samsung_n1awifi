@@ -118,11 +118,25 @@ on boot
 # CS socket
     mkdir /dev/socket/cs_socket 0770 system system
 
-# Permissions for Power Management
+# Permissions for PowerHAL
     chown system system /sys/class/input/input10/enabled
     chmod 0660 /sys/class/input/input10/enabled
     chown system system /sys/class/input/input9/enabled
     chmod 0660 /sys/class/input/input9/enabled
+    chown system system /sys/class/input/input8/enabled
+    chmod 0660 /sys/class/input/input8/enabled
+    chown system system /sys/class/input/input7/enabled
+    chmod 0660 /sys/class/input/input7/enabled
+    chown system system /sys/class/input/input6/enabled
+    chmod 0660 /sys/class/input/input6/enabled
+    chown system system /sys/class/input/input5/enabled
+    chmod 0660 /sys/class/input/input5/enabled
+    chown system system /sys/class/input/input4/enabled
+    chmod 0660 /sys/class/input/input4/enabled
+    chown system system /sys/class/input/input3/enabled
+    chmod 0660 /sys/class/input/input3/enabled
+    chown system system /sys/class/input/input2/enabled
+    chmod 0660 /sys/class/input/input2/enabled
 
 # Permissions for TouchScreen
     chown system radio /sys/class/sec/tsp/cmd
@@ -391,7 +405,7 @@ on fs
 
 # Permissions for torch
     chown system camera /sys/class/leds/torch-sec1/brightness
-    chmod 0660 /sys/class/leds/torch-sec1/brightness
+    chmod 0666 /sys/class/leds/torch-sec1/brightness
 
 # Permissions for LCD
     chown system radio /sys/class/lcd/panel/lcd_type
@@ -514,6 +528,7 @@ service mobicore /system/bin/mcDriverDaemon -r /system/app/FFFFFFFF0000000000000
     class core
     user system
     group system
+    oneshot
 
 # service for TZPR provisioning version check app
 service scranton_RD /system/bin/scranton_RD
