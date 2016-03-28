@@ -221,10 +221,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     charger_res_images
 
-# RANDOM NUMBER GENERATOR
-PRODUCT_PACKAGES += \
-    exyrngd
-
 ADDITIONAL_DEFAULT_PROPERTIES += \
     persist.sys.usb.config=mtp \
     ro.allow.mock.location=1 \
