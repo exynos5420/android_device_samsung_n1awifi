@@ -563,6 +563,13 @@ on property:persist.sys.storage_preload=1
 on property:persist.sys.storage_preload=0
     start umount_service
 
+service sswap /sbin/sswap -s
+    class core
+    user root
+    group root
+    oneshot
+    seclabel u:r:sswap:s0
+
 # Create camera ID file for Exynos camera HAL
 service camera_id /system/bin/sh /system/etc/init.exynos.cam.sh
     class main
