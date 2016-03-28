@@ -221,6 +221,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     charger_res_images
 
+PRODUCT_PROPERTY_OVERRIDES := \
+    keyguard.no_require_sim=true
+
 ADDITIONAL_DEFAULT_PROPERTIES += \
     persist.sys.usb.config=mtp \
     ro.allow.mock.location=1 \
