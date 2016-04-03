@@ -78,10 +78,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1
 
-# hardware/samsung/AdvancedDisplay (MDNIE)
-PRODUCT_PACKAGES += \
-    AdvancedDisplay
-
 # Camera permissions
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/init.exynos.cam.sh:system/etc/init.exynos.cam.sh
