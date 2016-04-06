@@ -37,12 +37,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gralloc.exynos5
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=320 \
-    ro.opengles.version=196608 \
-    ro.bq.gpu_to_cpu_unsupported=1 \
-    lockscreen.rot_override=true
-
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1600
 TARGET_SCREEN_WIDTH := 2560
@@ -63,9 +57,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
     $(LOCAL_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    af.fast_track_multiplier=1
-
 PRODUCT_PACKAGES += \
     libsamsung_symbols
 
@@ -74,9 +65,6 @@ PRODUCT_PACKAGES += \
     camera.universal5420 \
     libhwjpeg \
     Snap
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    camera2.portability.force_api=1
 
 # hardware/samsung/AdvancedDisplay (MDNIE)
 PRODUCT_PACKAGES += \
@@ -219,52 +207,16 @@ PRODUCT_PACKAGES += \
     macloader \
     wifiloader
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0
-
 # for off charging mode
 PRODUCT_PACKAGES += \
     charger_res_images
 
 PRODUCT_PROPERTY_OVERRIDES := \
-    keyguard.no_require_sim=true \
-    ro.com.android.dataroaming=false
-
-ADDITIONAL_DEFAULT_PROPERTIES += \
-    persist.sys.usb.config=mtp \
-    ro.allow.mock.location=1 \
-    ro.debug_level=0x4948 \
-    ro.secure=0
-
-# adb has root
-ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.adb.secure=0 \
-    persist.adb.notify=0 \
-    ro.secure=0 \
-    ro.debuggable=1 \
-    persist.service.adb.enable=1
-
-ADDITIONAL_BUILD_PROPERTIES += \
-    persist.sys.root_access=3
-
-# Fast mass storage
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vold.umsdirtyratio=50
-
-# DALVIK/ART
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapstartsize=16m \
-    dalvik.vm.heapgrowthlimit=192m \
-    dalvik.vm.heapsize=512m \
-    dalvik.vm.heaptargetutilization=0.75 \
-    dalvik.vm.heapminfree=2m \
-    dalvik.vm.heapmaxfree=8m \
-
-ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.sys.fw.dex2oat_thread_count=4
-
-# HWUI CACHES
-PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sf.lcd_density=320 \
+    ro.opengles.version=196608 \
+    ro.bq.gpu_to_cpu_unsupported=1 \
+    lockscreen.rot_override=true \
+	ro.sys.fw.dex2oat_thread_count=4 \
     ro.hwui.texture_cache_size=96 \
     ro.hwui.layer_cache_size=64 \
     ro.hwui.path_cache_size=16 \
@@ -276,7 +228,28 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_small_cache_height=2048 \
     ro.hwui.text_large_cache_width=4096 \
     ro.hwui.text_large_cache_height=4096 \
-    ro.hwui.fbo_cache_size=16
+    ro.hwui.fbo_cache_size=16 \
+	dalvik.vm.heapstartsize=16m \
+    dalvik.vm.heapgrowthlimit=192m \
+    dalvik.vm.heapsize=512m \
+    dalvik.vm.heaptargetutilization=0.75 \
+    dalvik.vm.heapminfree=2m \
+    dalvik.vm.heapmaxfree=8m \
+	ro.vold.umsdirtyratio=50 \
+	ro.adb.secure=0 \
+    persist.adb.notify=0 \
+    ro.secure=0 \
+	persist.sys.usb.config=mtp \
+    ro.allow.mock.location=1 \
+    ro.debug_level=0x4948 \
+    ro.debuggable=1 \
+    persist.service.adb.enable=1 \
+	persist.sys.root_access=3 \
+	keyguard.no_require_sim=true \
+    ro.com.android.dataroaming=falseb \
+	wifi.interface=wlan0 \
+    af.fast_track_multiplier=1 \
+    camera2.portability.force_api=1
 
 $(call inherit-product-if-exists, build/target/product/full_base.mk)
 # Call Samsung LSI board support packages
