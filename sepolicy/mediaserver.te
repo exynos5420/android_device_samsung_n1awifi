@@ -10,3 +10,6 @@ allow mediaserver efs_file:file r_file_perms;
 # Snap permissions
 allow mediaserver sensorservice_service:service_manager { find };
 allow mediaserver system_server:unix_stream_socket { read write };
+allow mediaserver camera_prop:property_service set;
+allow mediaserver camera_data_file:dir rw_dir_perms;
+allow mediaserver camera_data_file:file create_file_perms;
