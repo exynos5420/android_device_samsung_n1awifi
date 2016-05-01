@@ -92,6 +92,10 @@ PRODUCT_PACKAGES += \
     e2fsck \
     setup_fs
 
+# Gello
+PRODUCT_PACKAGES += \
+    Gello
+
 # GPS
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps/gps.conf:system/etc/gps.conf \
