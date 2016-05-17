@@ -162,6 +162,9 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 # Recovery
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.universal5420
 
+# SurfaceFlinger
+BOARD_USES_SYNC_MODE_FOR_MEDIA := true
+
 # Webkit
 ENABLE_WEBGL := true
 
