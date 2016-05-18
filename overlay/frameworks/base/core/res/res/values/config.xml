@@ -296,6 +296,4 @@
     <!-- enable doze powersaving mode -->
     <bool name="config_enableAutoPowerModes">true</bool>
     
-    <!-- Hardware keys enable/disable -->
-    <bool name="config_hwKeysPref">true</bool>
 </resources>
