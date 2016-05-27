@@ -35,7 +35,7 @@
 #include <camera/Camera.h>
 #include <camera/CameraParameters.h>
 
-#define CAMID_PATH "/data/camera/camid"
+#define CAMID_PATH "/data/CameraID.txt"
 
 static android::Mutex gCameraWrapperLock;
 static camera_module_t *gVendorModule = 0;
