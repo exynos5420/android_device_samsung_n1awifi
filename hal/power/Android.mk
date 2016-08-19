@@ -14,8 +14,6 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_POWERHAL_VARIANT),samsung)
-
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := power.$(TARGET_BOOTLOADER_BOARD_NAME)
@@ -29,5 +27,3 @@ ifneq ($(TARGET_TAP_TO_WAKE_NODE),)
 endif
 
 include $(BUILD_SHARED_LIBRARY)
-
-endif
