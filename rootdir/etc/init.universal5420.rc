@@ -237,6 +237,13 @@ on boot
     chown system radio /sys/class/sensors/temphumidity_sensor/name
     chown system radio /sys/class/sensors/temphumidity_sensor/engine_ver
     chown system radio /sys/class/sensors/temphumidity_sensor/send_accuracy
+# Grip_sensor
+    chown system radio /sys/class/sensors/grip_sensor/vendor
+    chown system radio /sys/class/sensors/grip_sensor/name
+    chown system radio /sys/class/sensors/grip_sensor/raw_data
+    chown system radio /sys/class/sensors/grip_sensor/calibration
+    chown system radio /sys/class/sensors/grip_sensor/threshold
+    chown system radio /sys/class/sensors/grip_sensor/onoff
 
 # Permissions Camera
     chown system radio /sys/class/camera/rear/rear_camfw
