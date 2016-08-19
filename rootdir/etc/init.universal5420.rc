@@ -96,10 +96,8 @@ on boot
     mkdir /data/app/mcRegistry 0775 system system
     chmod 0700 /dev/mobicore
     chmod 0666 /dev/mobicore-user
-    chmod 0660 /dev/s5p-smem
     chown system system /dev/mobicore
     chown radio system /dev/mobicore-user
-    chown system system /dev/s5p-smem
 
 # DRK permission
     mkdir /efs/prov 0770 radio system
@@ -161,7 +159,6 @@ on boot
     chown system radio /sys/class/sec/sec_touchkey/touchkey_threshold
     chown system system /sys/devices/virtual/sec/sec_touchkey/brightness
     chown system radio /sys/class/sec/sec_touchkey/extra_button_event
-    chown root system /sys/class/sec/sec_touchkey/tsp_keys_enabled
 
     chmod 0660 /dev/ttySAC2
     chown system system /dev/ttySAC2
@@ -249,7 +246,7 @@ on boot
     chown system radio /sys/class/camera/rear/rear_camfw
     chown system radio /sys/class/camera/rear/rear_camtype
     chown system radio /sys/class/camera/flash/rear_flash
-#    chown system radio /sys/class/camera/rear/isp_core
+    chown system radio /sys/class/camera/rear/isp_core
     chown system radio /sys/class/camera/front/front_camfw
     chown system radio /sys/class/camera/front/front_camtype
 
@@ -313,26 +310,20 @@ on boot
     chown radio system /sys/devices/platform/exynos5-tmu/curr_temp
 
 # Quadrant Benchmark
-#    chown radio system /sys/class/thermal/thermal_zone0/boost_mode
+    chown radio system /sys/class/thermal/thermal_zone0/boost_mode
     chown radio system /sys/class/devfreq/exynos5-busfreq-mif/min_freq
     chown radio system /sys/class/devfreq/exynos5-busfreq-int/min_freq
     chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/min_freq
     chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_freq
     chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/freq_table
-#    chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_eagle_count
-#    chown radio system /sys/devices/platform/pvrsrvkm.0/sgx_dvfs_max_lock
-#    chown radio system /sys/devices/platform/pvrsrvkm.0/sgx_dvfs_min_lock
-#    chown radio system /sys/devices/platform/pvrsrvkm.0/sgx_dvfs_table
-#    chmod 0664 /sys/class/thermal/thermal_zone0/boost_mode
+    chown radio system /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_eagle_count
+    chmod 0664 /sys/class/thermal/thermal_zone0/boost_mode
     chmod 0664 /sys/class/devfreq/exynos5-busfreq-mif/min_freq
     chmod 0664 /sys/class/devfreq/exynos5-busfreq-int/min_freq
     chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/min_freq
     chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_freq
     chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/freq_table
-#    chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_eagle_count
-#    chmod 0664 /sys/devices/platform/pvrsrvkm.0/sgx_dvfs_max_lock
-#    chmod 0664 /sys/devices/platform/pvrsrvkm.0/sgx_dvfs_min_lock
-#    chmod 0664 /sys/devices/platform/pvrsrvkm.0/sgx_dvfs_table
+    chmod 0664 /sys/devices/system/cpu/cpufreq/iks-cpufreq/max_eagle_count
 
 # CPU Idle
     chown system radio /sys/devices/system/cpu/cpu0/cpuidle/state2/disable
@@ -361,6 +352,7 @@ on boot
     chown radio system /sys/class/secgpio_check/secgpio_check_all/checked_sleepGPIO
 
 # IR_LED
+    on property:sys.boot_completed=1
     chown system radio /sys/class/sec/sec_ir/ir_send
     chown system radio /sys/class/sec/sec_ir/ir_send_result
 
@@ -369,25 +361,11 @@ on boot
     chown system radio /sys/class/sec/sec_barcode_emul/barcode_ver_check
     chown system radio /sys/class/sec/sec_barcode_emul/barcode_led_status
 
-on charger
-
-# Set cpu governor to powersave while in charging mode
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor powersave
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor powersave
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor powersave
-
-# EHCI runtime enable for LPA
-    write /sys/devices/platform/s5p-ehci/power/control auto
-
-# Do not set any USB mode while charging
-    setprop sys.usb.config charging
-
 on fs
 
 # Support Preload install apks
     mkdir /preload 0771 system system
-
+    setprop ro.crypto.fuse_sdcard true
     mount_all /fstab.universal5420
 
     chown radio system /efs
@@ -590,12 +568,12 @@ on property:persist.sys.storage_preload=1
 on property:persist.sys.storage_preload=0
     start umount_service
 
-service sswap /sbin/sswap -s
+# SSWAP
+service swapon /sbin/sswap -s
     class core
     user root
     group root
     oneshot
-    seclabel u:r:sswap:s0
 
 on property:init.svc.bootanim=stopped
     start camera_id
