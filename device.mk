@@ -39,7 +39,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320 \
-    ro.opengles.version=196608 \
+    ro.opengles.version=196609 \
     ro.bq.gpu_to_cpu_unsupported=1 \
     lockscreen.rot_override=true
 
