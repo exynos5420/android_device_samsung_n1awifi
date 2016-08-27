@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := device/samsung/lt03wifi
+LOCAL_PATH := device/samsung/n1awifi
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
@@ -270,4 +270,4 @@ $(call inherit-product-if-exists, build/target/product/full_base.mk)
 $(call inherit-product, hardware/samsung_slsi-cm/exynos5/exynos5.mk)
 $(call inherit-product, hardware/samsung_slsi-cm/exynos5420/exynos5420.mk)
 # Call the proprietary setup
-$(call inherit-product, vendor/samsung/lt03wifi/lt03wifi-vendor.mk)
+$(call inherit-product, vendor/samsung/n1awifi/n1awifi-vendor.mk)

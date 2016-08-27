@@ -15,12 +15,12 @@
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
 
-# Inherit from lt03wifi device
-$(call inherit-product, device/samsung/lt03wifi/device.mk)
+# Inherit from n1awifi device
+$(call inherit-product, device/samsung/n1awifi/device.mk)
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := full_lt03wifi
-PRODUCT_DEVICE := lt03wifi
+PRODUCT_NAME := full_n1awifi
+PRODUCT_DEVICE := n1awifi
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := samsung
 PRODUCT_MODEL := SM-P600

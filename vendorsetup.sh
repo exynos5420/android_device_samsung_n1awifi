@@ -1,2 +1,2 @@
-add_lunch_combo cm_lt03wifi-userdebug
-sh device/samsung/lt03wifi/patches/applypatch.sh
+add_lunch_combo cm_n1awifi-userdebug
+sh device/samsung/n1awifi/patches/applypatch.sh
