@@ -221,7 +221,8 @@ PRODUCT_PACKAGES += \
     wifiloader
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0
+    wifi.interface=wlan0 \
+    ro.data.large_tcp_window_size=true
 
 # for off charging mode
 PRODUCT_PACKAGES += \
