@@ -157,6 +157,9 @@ TARGET_USERIMAGES_USE_F2FS := true
 # Disable journaling on system.img to save space
 BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
 
+# PowerHAL
+TARGET_POWERHAL_VARIANT := samsung
+
 # Enable dex-preoptimization to speed up first boot sequence
 WITH_DEXPREOPT := true
 
