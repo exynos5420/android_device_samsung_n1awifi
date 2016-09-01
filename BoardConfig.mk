@@ -62,7 +62,7 @@ TARGET_PROVIDES_LIBLIGHT := true
 # Kernel
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
-TARGET_KERNEL_CONFIG := cyanogenmod_n1awifi_defconfig
+TARGET_KERNEL_CONFIG := cyanogenmod_deathly_n1awifi_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/exynos5420
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
