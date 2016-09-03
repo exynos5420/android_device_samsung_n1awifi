@@ -280,8 +280,8 @@
     <!-- reference volume index for music stream to limit headphone volume and display warning -->
     <integer name="config_safe_media_volume_index">7</integer>
 
-    <!-- Boolean to enable stylus gestures -->
-    <bool name="config_stylusGestures">true</bool>
+    <!-- Boolean to enable stylus gestures Broken in cm14
+    <bool name="config_stylusGestures">true</bool> -->
 
     <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
          autodetected from the Configuration. -->

@@ -52,9 +52,6 @@ TARGET_OTA_ASSERT_DEVICE := lt033g,lt03wifi,lt03wifiue,n1awifi
 # Camera
 BOARD_CAMERA_SNUMINTS := 28
 BOARD_NEEDS_MEMORYHEAPION := true
-COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
-COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
-COMMON_GLOBAL_CFLAGS += -DSAMSUNG_DVFS
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
@@ -71,9 +68,6 @@ BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charg
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 BACKLIGHT_PATH := "/sys/class/backlight/panel/brightness"
-
-# Build the platform with Clang
-USE_CLANG_PLATFORM_BUILD := true
 
 # We use our lights hal
 TARGET_PROVIDES_LIBLIGHT := true
@@ -128,9 +122,6 @@ TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 # Hardware
 BOARD_HARDWARE_CLASS += device/samsung/n1awifi/cmhw
 
-# Samsung LSI OpenMAX
-COMMON_GLOBAL_CFLAGS += -DUSE_NATIVE_SEC_NV12TILED # use format from fw/native
-COMMON_GLOBAL_CFLAGS += -DWIDEVINE_PLUGIN_PRE_NOTIFY_ERROR
 
 # Samsung OpenMAX Video
 BOARD_USE_STOREMETADATA := true
@@ -221,7 +212,8 @@ WIFI_BAND                        := 802_11_ABG
 BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
 
 # Force the screenshot path to CPU consumer (fix glitches)
-COMMON_GLOBAL_CFLAGS += -DFORCE_SCREENSHOT_CPU_PATH
+# TODO: Reenable this
+#COMMON_GLOBAL_CFLAGS += -DFORCE_SCREENSHOT_CPU_PATH
 
 # SELinux
 BOARD_SEPOLICY_DIRS := \
