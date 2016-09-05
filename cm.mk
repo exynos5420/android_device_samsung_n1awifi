@@ -1,7 +1,7 @@
 
 
 # Inherit some common CM stuff.
-#$(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
+$(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
 
 $(call inherit-product, device/samsung/n1awifi/full_n1awifi.mk)
 

@@ -228,8 +228,8 @@
             64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
          config to 7.
-    On Samsung SM-P600/P601 following keys: 1(Home) + 2(Back) + 4(Menu) + 64(Volume) = 71 -->
-    <integer name="config_deviceHardwareKeys">67</integer>
+    On Samsung SM-P600/P601 following keys: 1(Home) + 2(Back) + 4(Menu) + 64(Volume) = 71 -
+    <integer name="config_deviceHardwareKeys">67</integer> -->
     <!-- integer name="config_deviceHardwareKeys">71</integer -->
 
     <!-- Hardware keys present on the device with the ability to wake, stored as a bit field.
@@ -243,8 +243,8 @@
             32 - Camera
             64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
-         config to 7. -->
-    <integer name="config_deviceHardwareWakeKeys">65</integer>
+         config to 7. 
+    <integer name="config_deviceHardwareWakeKeys">65</integer> -->
 
     <!-- Set to true to add links to Cell Broadcast app from Settings and MMS app. -->
     <bool name="config_cellBroadcastAppLinks">true</bool>
