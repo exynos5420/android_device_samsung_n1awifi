@@ -6,7 +6,6 @@ on init
     export LD_SHIM_LIBS "/system/lib/libexynoscamera.so|libsamsung_symbols.so:/system/bin/gpsd|libdmitry.so"
 
     # Support legacy paths
-    symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
     symlink /sdcard1 /storage/sdcard1
     symlink /sdcard1 /mnt/extSdCard
