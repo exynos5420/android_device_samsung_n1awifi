@@ -208,7 +208,6 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf
 
 PRODUCT_PACKAGES += \
-    dhcpcd.conf \
     hostapd \
     hostapd_default.conf \
     libwpa_client \
@@ -219,7 +218,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
-    ro.data.large_tcp_window_size=true
+    ro.data.large_tcp_window_size=true \
+    ro.radio.noril=yes
 
 # for off charging mode
 PRODUCT_PACKAGES += \

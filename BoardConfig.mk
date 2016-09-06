@@ -81,6 +81,7 @@ TARGET_BOOTLOADER_BOARD_NAME := universal5420
 
 # FIMG2D
 BOARD_USES_SKIA_FIMGAPI := true
+BOARD_USES_FIMGAPI_V4L2 := true
 
 # GSC
 BOARD_USES_ONLY_GSC0_GSC1 := true
@@ -217,9 +218,8 @@ WIFI_BAND                        := 802_11_ABG
 # CMHW
 BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
 
-# Force the screenshot path to CPU consumer (fix glitches)
-# TODO: Enable this after syncing
-#BOARD_GLOBAL_CFLAGS += -DFORCE_SCREENSHOT_CPU_PATH
+# Fixes screen flicker
+TARGET_FORCE_SCREENSHOT_CPU_PATH := true
 
 # SELinux
 BOARD_SEPOLICY_DIRS := \
