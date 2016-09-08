@@ -565,6 +565,3 @@ service swapon /sbin/sswap -s
     user root
     group root
     oneshot
-
-on property:init.svc.bootanim=stopped
-    start camera_id
