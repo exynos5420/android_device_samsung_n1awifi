@@ -184,9 +184,9 @@ PRODUCT_PACKAGES += \
     libsecril-client-sap \
     cbd
 
-#PRODUCT_PACKAGES += \
-#    CellBroadcastReceiver \
-#    SamsungServiceMode
+# Yes, for now this is literally necessary for the device to work
+PRODUCT_PACKAGES += \
+    telephony-ext
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
