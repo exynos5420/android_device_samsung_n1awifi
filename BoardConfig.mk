@@ -151,8 +151,9 @@ BOARD_USE_HEVCDEC_SUPPORT := true
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
 # Samsung Seiren audio
-BOARD_USE_ALP_AUDIO := true
-BOARD_USE_SEIREN_AUDIO := true
+# TODO: Re-add this when audio is working
+# BOARD_USE_ALP_AUDIO := true
+# BOARD_USE_SEIREN_AUDIO := true
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
