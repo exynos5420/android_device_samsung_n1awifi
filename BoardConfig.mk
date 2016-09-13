@@ -150,10 +150,6 @@ BOARD_USE_HEVCDEC_SUPPORT := true
 # Sensors
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
-# Samsung Seiren audio
-BOARD_USE_ALP_AUDIO := true
-BOARD_USE_SEIREN_AUDIO := true
-
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
 #HAX: real block size is too small to build a ROM
