@@ -8,9 +8,7 @@ on init
     # Support legacy paths
     symlink /sdcard /storage/sdcard0
     symlink /sdcard1 /storage/sdcard1
-    symlink /sdcard1 /mnt/extSdCard
     symlink /sdcard1 /external_sd
-    symlink /storage/usbdisk /mnt/usbdisk
 
     symlink /data/app /factory
 
@@ -55,10 +53,6 @@ on post-fs-data
 # For kernel lock in BT/WiFi race condtion
     chmod 0600 /dev/btlock
     chown bluetooth bluetooth /dev/btlock
-
-# Added for TZ Playready DRM Support
-    mkdir /efs/drm 0774 drm system
-    mkdir /efs/drm/playready 0775 drm system
 
     #Create directory for hostapd
     mkdir /data/hostapd 0770 system wifi
