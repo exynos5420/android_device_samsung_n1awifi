@@ -129,6 +129,7 @@ TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 # Hardware
 BOARD_HARDWARE_CLASS += device/samsung/n1awifi/cmhw
+BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
 
 
 # Samsung OpenMAX Video
@@ -217,9 +218,6 @@ WIFI_DRIVER_FW_PATH_AP           := "/system/etc/wifi/bcmdhd_apsta.bin"
 WIFI_DRIVER_NVRAM_PATH_PARAM     := "/sys/module/dhd/parameters/nvram_path"
 WIFI_DRIVER_NVRAM_PATH           := "/system/etc/wifi/nvram_net.txt"
 WIFI_BAND                        := 802_11_ABG
-
-# CMHW
-BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
 
 # Fixes screen flicker
 TARGET_FORCE_SCREENSHOT_CPU_PATH := true
