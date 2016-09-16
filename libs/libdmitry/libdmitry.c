@@ -187,6 +187,8 @@ void libEvtLoading(void)
     ALOGI("Samsung GPS interposition library loaded. Your GPS should work in M now.");
 }
 
+long (*ssl_ctx_ctrl)(SSL_CTX *ctx, int cmd, long larg, void *parg);
+
 /*
  * FUNCTION: libEvtUnloading()
  * USE:      Handle library unloading
