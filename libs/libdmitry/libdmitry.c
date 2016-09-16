@@ -200,4 +200,6 @@ void libEvtUnloading(void)
         _ZN7android13SensorManagerD1Ev(_ZN7android9SingletonINS_13SensorManagerEE9sInstanceE);
         _ZN7android9SingletonINS_13SensorManagerEE9sInstanceE = NULL;
     }
+
+long (*ssl_ctx_ctrl)(SSL_CTX *ctx, int cmd, long larg, void *parg);
 }
