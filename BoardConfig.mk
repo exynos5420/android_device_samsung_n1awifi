@@ -131,6 +131,8 @@ TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 BOARD_HARDWARE_CLASS += device/samsung/n1awifi/cmhw
 BOARD_HARDWARE_CLASS += hardware/samsung/cmhw
 
+# Recovery
+TARGET_NO_RECOVERY := true
 
 # Samsung OpenMAX Video
 BOARD_USE_STOREMETADATA := true
