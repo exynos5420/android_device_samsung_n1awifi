@@ -27,7 +27,7 @@
     <integer name="def_long_press_timeout_millis">400</integer>
 
     <!-- Enable notification counters in statusbar -->
-    <integer name="def_notif_count">1</integer>
+    <!-- <integer name="def_notif_count">1</integer> -->
 
     <bool name="def_accelerometer_rotation">true</bool>
 
@@ -36,7 +36,7 @@
            ROTATION_90_MODE: 2
            ROTATION_180_MODE: 4
            ROTATION_270_MODE: 8 -->
-    <integer name="def_accelerometer_rotation_angles">15</integer>
+    <!-- <integer name="def_accelerometer_rotation_angles">15</integer> -->
 
     <string name="def_airplane_mode_radios" translatable="false">cell,bluetooth,wifi,nfc,wimax,ant</string>
     <string name="airplane_mode_toggleable_radios" translatable="false">bluetooth,wifi,nfc,ant</string>
