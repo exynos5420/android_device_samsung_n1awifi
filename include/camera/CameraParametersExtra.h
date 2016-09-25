@@ -32,6 +32,9 @@ const char CameraParameters::ISO_100[] = "100"; \
 const char CameraParameters::ISO_80[] = "80"; \
 const char CameraParameters::ISO_50[] = "50"; \
 \
+int CameraParameters::getInt64(const char *key) const { \
+	key; return -1; } \
+\
 extern "C" { \
     void acquire_dvfs_lock(void) { } \
     void release_dvfs_lock(void) { } \
@@ -57,6 +60,8 @@ CAMERA_PARAMETERS_EXTRA_C_DURATION_TIMER \
     static const char ISO_100[]; \
     static const char ISO_80[]; \
     static const char ISO_50[]; \
+    \
+    int getInt64(const char *key) const; \
     \
     /* LAST_LINE OF CAMERA_PARAMETERS_EXTRA_H, every line before this one *MUST* have
      * a backslash \ at the end of the line or else everything will break.
