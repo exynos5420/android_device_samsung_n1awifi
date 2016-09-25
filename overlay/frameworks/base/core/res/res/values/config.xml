@@ -262,10 +262,6 @@
          * The device must be provisioned with HDCP keys (for protected content).-->
     <bool name="config_enableWifiDisplay">true</bool>
 
-    <!-- Enable translucent UI -->
-    <bool name="config_enableLockScreenTranslucentDecor">true</bool>
-    <bool name="config_enableTranslucentDecor">true</bool>
-
     <!--  Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">4</integer>
 
