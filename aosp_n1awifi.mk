@@ -6,6 +6,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 
 PRODUCT_NAME := aosp_n1awifi
 PRODUCT_DEVICE := n1awifi
+TARGET_DEVICE := aosp
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_MODEL=SM-P600 \
