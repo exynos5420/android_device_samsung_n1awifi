@@ -187,10 +187,6 @@ PRODUCT_PACKAGES += \
     libsecril-client \
     libsecril-client-sap 
 
-# Yes, for now this is literally necessary for the device to work
-PRODUCT_PACKAGES += \
-    telephony-ext
-
 # ANT+
 PRODUCT_PACKAGES += \
     AntHalService \
