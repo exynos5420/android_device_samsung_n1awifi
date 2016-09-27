@@ -184,10 +184,6 @@ PRODUCT_PACKAGES += \
     libsecril-client-sap \
     cbd
 
-# Yes, for now this is literally necessary for the device to work
-PRODUCT_PACKAGES += \
-    telephony-ext
-
 # Bluetooth
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
