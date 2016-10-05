@@ -11,12 +11,6 @@
     <item name="gps.on">0</item>
     <item name="dsp.audio">96.8</item>
     <item name="dsp.video">769</item>
-    <item name="radio.active">250</item>
-    <item name="radio.scanning">82</item>
-    <array name="radio.on">
-        <value>3.4</value>
-        <value>3.4</value>
-    </array>
     <array name="cpu.speeds">
         <value>1900000</value>
         <value>1800000</value>

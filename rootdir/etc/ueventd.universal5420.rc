@@ -75,8 +75,3 @@
 # USB Driver
 /dev/ttyUSB*              0660   system     usb
 /dev/usb/lp*              0660   system     usb
-
-/dev/block/mmcblk0p13     0660   system     radio
-/dev/umts*                0660   system     radio
-
-/dev/block/mmcblk0p8      0660   system     system
