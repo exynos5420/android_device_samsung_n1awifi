@@ -52,11 +52,6 @@ on post-fs-data
 #drm permission
     mkdir /efs/drm 0774 drm system
 
-    # Hack for early versions of CM14 - Fix com.android.phone/Mobile Data crashes
-    mkdir /data/user_de/0/com.android.providers.telephony 0775
-    chown radio radio /data/user_de/0/com.android.providers.telephony
-    chmod 0775 /data/user_de/0/com.android.providers.telephony
-
 # [ SEC_MM_DRM
     # OMA DB directory creation
     mkdir /data/system/databases 0775
