@@ -137,6 +137,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libOMX.Exynos.WMV.Decoder
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.stagefright.legacyencoder=true
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
