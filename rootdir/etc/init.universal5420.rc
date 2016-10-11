@@ -4,7 +4,6 @@ import init.universal5420.wifi.rc
 import init.universal5420.power.rc
 
 on init
-    export LD_SHIM_LIBS "/system/lib/libexynoscamera.so|libsamsung_symbols.so"
 
     # Support legacy paths
     symlink /sdcard /storage/sdcard0
