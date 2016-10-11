@@ -88,9 +88,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Gello
 
-PRODUCT_PACKAGES += \
-    libdmitry
-
 # Remove packages that do not work well
 PRODUCT_PACKAGES += \
     RemovePackages
