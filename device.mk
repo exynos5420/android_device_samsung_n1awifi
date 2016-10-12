@@ -91,6 +91,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libdmitry
 
+# Remove packages that do not work well
+PRODUCT_PACKAGES += \
+    RemovePackages
+
 # Touchscreen
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/idc/Synaptics_HID_TouchPad.idc:system/usr/idc/Synaptics_HID_TouchPad.idc \
