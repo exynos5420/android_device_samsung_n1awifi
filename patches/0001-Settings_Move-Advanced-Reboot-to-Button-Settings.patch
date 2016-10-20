@@ -1,0 +1,172 @@
+From 57d8e450eb5f9500d9136374667e62dd1ee99ff2 Mon Sep 17 00:00:00 2001
+From: Varun Date <date.varun123@gmail.com>
+Date: Fri, 13 May 2016 13:36:27 +0530
+Subject: [PATCH] Settings: Move Advanced Reboot to Button Settings
+
+Signed-off-by: Varun Date <date.varun123@gmail.com>
+---
+ res/xml/button_settings.xml                       |  5 +++++
+ res/xml/development_prefs.xml                     |  5 -----
+ src/com/android/settings/ButtonSettings.java      | 15 ++++++++++++++-
+ src/com/android/settings/DevelopmentSettings.java | 21 +--------------------
+ 4 files changed, 20 insertions(+), 26 deletions(-)
+
+project packages/apps/Settings/
+diff --git a/packages/apps/Settings/res/xml/button_settings.xml b/packages/apps/Settings/res/xml/button_settings.xml
+index 68e1285..0c7f1c2 100644
+--- a/packages/apps/Settings/res/xml/button_settings.xml
++++ b/packages/apps/Settings/res/xml/button_settings.xml
+@@ -79,6 +79,11 @@
+             android:title="@string/camera_double_tap_power_gesture_title"
+             android:summary="@string/camera_double_tap_power_gesture_desc"
+             android:persistent="false" />
++	
++	<SwitchPreference
++        android:key="advanced_reboot"
++        android:title="@string/advanced_reboot_title"
++        android:summary="@string/advanced_reboot_summary" />
+ 
+     </PreferenceCategory>
+ 
+diff --git a/packages/apps/Settings/res/xml/development_prefs.xml b/packages/apps/Settings/res/xml/development_prefs.xml
+index c95cfb8..3e27f5e 100644
+--- a/packages/apps/Settings/res/xml/development_prefs.xml
++++ b/packages/apps/Settings/res/xml/development_prefs.xml
+@@ -32,11 +32,6 @@
+             android:title="@*android:string/bugreport_title"
+             android:dialogTitle="@*android:string/bugreport_title" />
+ 
+-    <SwitchPreference
+-        android:key="advanced_reboot"
+-        android:title="@string/advanced_reboot_title"
+-        android:summary="@string/advanced_reboot_summary" />
+-
+     <PreferenceScreen
+             android:key="local_backup_password"
+             android:title="@string/local_backup_password_title"
+diff --git a/packages/apps/Settings/src/com/android/settings/ButtonSettings.java b/packages/apps/Settings/src/com/android/settings/ButtonSettings.java
+index 109d7dc..a18b7e8 100644
+--- a/packages/apps/Settings/src/com/android/settings/ButtonSettings.java
++++ b/packages/apps/Settings/src/com/android/settings/ButtonSettings.java
+@@ -28,6 +28,7 @@ import android.content.SharedPreferences.Editor;
+ import android.os.Bundle;
+ import android.os.RemoteException;
+ import android.os.Handler;
++import android.os.UserHandle;
+ import android.preference.ListPreference;
+ import android.preference.Preference;
+ import android.preference.PreferenceCategory;
+@@ -83,6 +84,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+     private static final String KEY_VOLUME_CONTROL_RING_STREAM = "volume_keys_control_ring_stream";
+     private static final String KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE
+             = "camera_double_tap_power_gesture";
++    private static final String ADVANCED_REBOOT_KEY = "advanced_reboot";
+ 
+     private static final String CATEGORY_POWER = "power_key";
+     private static final String CATEGORY_HOME = "home_key";
+@@ -139,6 +141,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+     private SwitchPreference mPowerEndCall;
+     private SwitchPreference mHomeAnswerCall;
+     private SwitchPreference mCameraDoubleTapPowerGesture;
++    private SwitchPreference mAdvancedReboot;
+ 
+     private PreferenceCategory mNavigationPreferencesCat;
+ 
+@@ -205,6 +208,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+         mHomeAnswerCall = (SwitchPreference) findPreference(KEY_HOME_ANSWER_CALL);
+ 
+         mHandler = new Handler();
++
++        mAdvancedReboot = (SwitchPreference) findPreference(ADVANCED_REBOOT_KEY);
++        mAdvancedReboot.setChecked(CMSettings.Secure.getIntForUser(resolver,
++            CMSettings.Secure.ADVANCED_REBOOT, 1, UserHandle.USER_CURRENT) == 1);
++        mAdvancedReboot.setOnPreferenceChangeListener(this);
+ 
+         // Force Navigation bar related options
+         mDisableNavigationKeys = (SwitchPreference) findPreference(DISABLE_NAV_KEYS);
+@@ -623,6 +631,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+             Settings.Secure.putInt(getContentResolver(), CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED,
+                     value ? 0 : 1 /* Backwards because setting is for disabling */);
+             return true;
++        } else if (preference == mAdvancedReboot) {
++            boolean show = (Boolean) newValue;
++            CMSettings.Secure.putIntForUser(getActivity().getContentResolver(),
++                    CMSettings.Secure.ADVANCED_REBOOT, show ? 1 : 0, UserHandle.USER_CURRENT);
++            return true;
+         }
+         return false;
+     }
+diff --git a/packages/apps/Settings/src/com/android/settings/DevelopmentSettings.java b/packages/apps/Settings/src/com/android/settings/DevelopmentSettings.java
+index b5b89cb..709e0e8 100644
+--- a/packages/apps/Settings/src/com/android/settings/DevelopmentSettings.java
++++ b/packages/apps/Settings/src/com/android/settings/DevelopmentSettings.java
+@@ -198,8 +198,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
+ 
+     private static final String DEVELOPMENT_TOOLS = "development_tools";
+ 
+-    private static final String ADVANCED_REBOOT_KEY = "advanced_reboot";
+-
+     private static final String DEVELOPMENT_SHORTCUT_KEY = "development_shortcut";
+ 
+     private static final int RESULT_DEBUG_APP = 1000;
+@@ -297,7 +295,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
+ 
+     private Preference mRootAppops;
+ 
+-    private SwitchPreference mAdvancedReboot;
+ 
+     private SwitchPreference mUpdateRecovery;
+ 
+@@ -385,7 +382,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
+         mDebugViewAttributes = findAndInitSwitchPref(DEBUG_VIEW_ATTRIBUTES);
+         mPassword = (PreferenceScreen) findPreference(LOCAL_BACKUP_PASSWORD);
+         mAllPrefs.add(mPassword);
+-        mAdvancedReboot = findAndInitSwitchPref(ADVANCED_REBOOT_KEY);
+         mUpdateRecovery = findAndInitSwitchPref(UPDATE_RECOVERY_KEY);
+         mDevelopmentShortcut = findAndInitSwitchPref(DEVELOPMENT_SHORTCUT_KEY);
+ 
+@@ -395,7 +391,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
+             disableForUser(mClearAdbKeys);
+             disableForUser(mEnableTerminal);
+             disableForUser(mPassword);
+-            disableForUser(mAdvancedReboot);
+             disableForUser(mUpdateRecovery);
+             disableForUser(mDevelopmentShortcut);
+         }
+@@ -761,7 +756,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
+         updateSimulateColorSpace();
+         updateUSBAudioOptions();
+         updateRootAccessOptions();
+-        updateAdvancedRebootOptions();
+         updateDevelopmentShortcutOptions();
+         if (mUpdateRecovery != null) {
+             updateUpdateRecoveryOptions();
+@@ -771,17 +765,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
+         }
+     }
+ 
+-    private void writeAdvancedRebootOptions() {
+-        CMSettings.Secure.putInt(getActivity().getContentResolver(),
+-                CMSettings.Secure.ADVANCED_REBOOT,
+-                mAdvancedReboot.isChecked() ? 1 : 0);
+-    }
+-
+-    private void updateAdvancedRebootOptions() {
+-        mAdvancedReboot.setChecked(CMSettings.Secure.getInt(getActivity().getContentResolver(),
+-                CMSettings.Secure.ADVANCED_REBOOT, 0) != 0);
+-    }
+-
+     private void resetDevelopmentShortcutOptions() {
+         CMSettings.Secure.putInt(getActivity().getContentResolver(),
+                 CMSettings.Secure.DEVELOPMENT_SHORTCUT, 0);
+@@ -2093,9 +2076,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
+             writeColorTemperature();
+         } else if (preference == mUSBAudio) {
+             writeUSBAudioOptions();
+-        } else if (preference == mAdvancedReboot) {
+-            writeAdvancedRebootOptions();
+-        } else if (INACTIVE_APPS_KEY.equals(preference.getKey())) {
++	} else if (INACTIVE_APPS_KEY.equals(preference.getKey())) {
+             startInactiveAppsFragment();
+         } else if (preference == mDevelopmentShortcut) {
+             writeDevelopmentShortcutOptions();
