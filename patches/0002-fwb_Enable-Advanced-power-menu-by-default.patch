@@ -1,0 +1,20 @@
+Enable advanced power menu by default
+
+@westcripp
+
+https://github.com/ResurrectionRemix/android_frameworks_base/commit/6e3dc0b2aa473ce417dca77130878adce3d0f8b6
+
+project frameworks/base/
+diff --git a/frameworks/base/services/core/java/com/android/server/power/ShutdownThread.java b/frameworks/base/services/core/java/com/android/server/power/ShutdownThread.java
+index 36a9ca2..76acf9d 100644
+--- a/frameworks/base/services/core/java/com/android/server/power/ShutdownThread.java
++++ b/frameworks/base/services/core/java/com/android/server/power/ShutdownThread.java
+@@ -174,7 +174,7 @@ public final class ShutdownThread extends Thread {
+         KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+         boolean keyguardLocked = km.inKeyguardRestrictedInputMode() && km.isKeyguardSecure();
+         boolean advancedRebootEnabled = CMSettings.Secure.getInt(context.getContentResolver(),
+-                CMSettings.Secure.ADVANCED_REBOOT, 0) == 1;
++                CMSettings.Secure.ADVANCED_REBOOT, 1) == 1;
+         boolean isPrimaryUser = UserHandle.getCallingUserId() == UserHandle.USER_OWNER;
+ 
+         return advancedRebootEnabled && !keyguardLocked && isPrimaryUser;
