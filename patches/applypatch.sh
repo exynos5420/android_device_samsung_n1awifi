@@ -15,6 +15,7 @@ if [ -n "$(find $dir -name \*.patch -type f)" ]; then
         patch -p1 -N -i $patch -r - -d $top
     done
 
+    echo "*** Patching Done ***"
     find . -name "*.orig" -delete
 else
     echo "*** No patches ***"
