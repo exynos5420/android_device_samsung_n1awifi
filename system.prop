@@ -1,0 +1,9 @@
+#
+# system.prop for n1awifi
+#
+
+# Radio
+ro.radio.noril=yes
+
+# UI
+ro.sf.lcd_density=320
