@@ -1,0 +1,21 @@
+From the list, collected only libOMX.Exynos.MP3.Dekoder
+With him there are problems in the form of  crackling.
+
+project hardware/samsung_slsi-cm/exynos5/
+diff --git a/hardware/samsung_slsi-cm/exynos5/exynos5.mk b/hardware/samsung_slsi-cm/exynos5/exynos5.mk
+index 7c34f85..c6a9d98 100644
+--- a/hardware/samsung_slsi-cm/exynos5/exynos5.mk
++++ b/hardware/samsung_slsi-cm/exynos5/exynos5.mk
+@@ -23,12 +23,6 @@ PRODUCT_PACKAGES := \
+ 	libOMX.Exynos.MPEG4.Encoder \
+ 	libOMX.Exynos.AVC.Encoder
+ 
+-# codecs (audio)
+-PRODUCT_PACKAGES += \
+-	libOMX.Exynos.AAC.Decoder \
+-	libOMX.Exynos.MP3.Decoder \
+-	libOMX.Exynos.WMA.Encoder
+-
+ # Remove FLAC hw decoder because the needed
+ # frameworks patch cannot be merged because
+ # of licensing issues
