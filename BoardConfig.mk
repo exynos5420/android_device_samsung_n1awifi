@@ -24,7 +24,7 @@ TARGET_SOC := exynos5420
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 
 # Bootloader
-TARGET_OTA_ASSERT_DEVICE := lt03wifi,lt03wifiue,n1awifi
+TARGET_OTA_ASSERT_DEVICE := lt033g,lt03wifi,lt03wifiue,n1awifi
 
 # Kernel
 TARGET_KERNEL_CONFIG := cyanogenmod_deathly_n1awifi_defconfig
