@@ -35,6 +35,9 @@ IR_HAS_ONE_FREQ_RANGE := true
 # Hardware
 BOARD_HARDWARE_CLASS += $(LOCAL_PATH)/cmhw
 
+# Includes
+TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
+
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
 #HAX: real block size is too small to build a ROM
