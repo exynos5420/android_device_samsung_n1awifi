@@ -55,10 +55,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml
 
-# Gello (CM browser)
-PRODUCT_PACKAGES += \
-    Gello
-
 # Ramdisk
 PRODUCT_PACKAGES += \
     init.target.rc \
