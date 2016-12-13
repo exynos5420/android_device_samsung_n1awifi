@@ -19,9 +19,9 @@
   },
   {
     "remote":      "github",
-    "repository":  "Project-lt03wifi/android_hardware_samsung",
+    "repository":  "exynos5420/android_hardware_samsung",
     "target_path": "hardware/samsung",
-    "branch":      "m6.0"
+    "branch":      "LD_N7.1"
   },
   {
     "remote":      "github",
@@ -31,7 +31,7 @@
   },
   {
     "remote":      "github",
-    "repository":  "CyanogenMod/android_hardware_samsung_slsi-cm_exynos5",
+    "repository":  "exynos5420/android_hardware_samsung_slsi-cm_exynos5",
     "target_path": "hardware/samsung_slsi-cm/exynos5",
     "branch":      "cm-14.1"
   },
