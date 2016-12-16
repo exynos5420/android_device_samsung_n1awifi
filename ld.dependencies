@@ -9,13 +9,13 @@
     "remote":      "github",
     "repository":  "exynos5420/android_kernel_samsung_exynos5420",
     "target_path": "kernel/samsung/exynos5420",
-    "branch":      "cm-14.1"
+    "branch":      "LD_N7.1"
   },
   {
     "remote":      "github",
     "repository":  "exynos5420/proprietary_vendor_samsung",
     "target_path": "vendor/samsung",
-    "branch":      "cm-14.1"
+    "branch":      "LD_N7.1"
   },
   {
     "remote":      "github",

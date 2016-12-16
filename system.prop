@@ -5,8 +5,5 @@
 # Radio
 ro.radio.noril=yes
 
-# UI
-ro.sf.lcd_density=320
-
 # HW (this enables the navbar, a user can easily set it to 1 to disable it)
 qemu.hw.mainkeys=0 
