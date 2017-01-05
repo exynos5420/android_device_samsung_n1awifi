@@ -48,8 +48,5 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2524971008
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 12863913984
 BOARD_FLASH_BLOCK_SIZE := 4096
 
-# SELinux
-BOARD_SEPOLICY_DIRS += device/samsung/exynos5420-common/sepolicy
-
 # Inherit from exynos5420-common
 include device/samsung/exynos5420-common/BoardConfigCommon.mk
