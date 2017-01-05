@@ -65,6 +65,3 @@ PRODUCT_PACKAGES += \
 
 # Call the proprietary setup
 $(call inherit-product, vendor/samsung/n1awifi/n1awifi-vendor.mk)
-
-# Import the common tree changes
-include device/samsung/exynos5420-common/exynos5420.mk
