@@ -26,9 +26,6 @@
     <!-- Default for Settings.Secure.LONG_PRESS_TIMEOUT_MILLIS -->
     <integer name="def_long_press_timeout_millis">400</integer>
 
-    <!-- Enable notification counters in statusbar -->
-    <integer name="def_notif_count">1</integer>
-
     <bool name="def_accelerometer_rotation">true</bool>
 
     <!-- Bitmask of allowed display rotation angles:
