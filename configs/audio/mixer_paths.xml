@@ -217,8 +217,8 @@
     <ctl name="SPK Switch" value="1" />
 
     <ctl name="Speaker Digital Volume" value="127" />
-    <ctl name="SPKOUTL Input 1 Volume" value="32" />
-    <ctl name="SPKOUTR Input 1 Volume" value="32" />
+    <ctl name="SPKOUTL Input 1 Volume" value="50" />
+    <ctl name="SPKOUTR Input 1 Volume" value="50" />
   </path>
 
   <path name="earpiece">
@@ -354,7 +354,7 @@
     <ctl name="AIF2TX1 Input 1" value="ASRC1L" />
     <ctl name="AIF2TX2 Input 1" value="ASRC1R" />
 
-    <ctl name="IN1L Volume" value="18" />
+    <ctl name="IN1L Volume" value="32" />
     <ctl name="IN1L Digital Volume" value="128" />
     <ctl name="LHPF1 Input 1 Volume" value="32" />
   </path>
