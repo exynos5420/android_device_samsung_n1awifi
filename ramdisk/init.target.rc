@@ -55,3 +55,6 @@ on boot
     chown system radio /sys/class/sec/sec_epen/epen_checksum_result
     chown system radio /sys/class/sec/sec_epen/epen_saving_mode
     chown system radio /sys/class/sec/sec_epen/boost_level
+
+# Set min gpu clock at 177mhz
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq_gpu 177
