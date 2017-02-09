@@ -8,3 +8,5 @@ ro.radio.noril=yes
 # UI
 ro.sf.lcd_density=320
 
+# LD Device Maintainer
+ro.ld.maintainers=Moshe Barash (mosimchah), Tiago Campos (zakooz), Joshua Wiley (Orion116)
