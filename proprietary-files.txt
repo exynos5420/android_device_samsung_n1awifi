@@ -1,0 +1,24 @@
+# Wifi Firmware
+etc/wifi/bcmdhd_apsta.bin
+etc/wifi/bcmdhd_ibss.bin
+etc/wifi/bcmdhd_mfg.bin
+etc/wifi/bcmdhd_sta.bin
+etc/wifi/cred.conf.txt
+etc/wifi/nvram_mfg.txt
+etc/wifi/nvram_net.txt
+
+# GPS
+bin/gpsd
+lib/hw/gps.default.so
+
+# Sensors
+lib/hw/sensors.universal5420.so
+lib/libak8963c.so:system/lib/libak8963c.so
+
+# Bluetooth
+vendor/firmware/bcm4335_V0105.0552.hcd
+
+# Samsung Exynos5 SoC series FIMC-IS driver firmware
+vendor/firmware/fimc_is_fw2_IMX134.bin
+vendor/firmware/setfile_6b2.bin
+vendor/firmware/setfile_imx134.bin
