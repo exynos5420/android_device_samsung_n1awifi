@@ -1,3 +1,6 @@
+# Camera
+lib/hw/camera.universal5420.so
+
 # Wifi Firmware
 etc/wifi/bcmdhd_apsta.bin
 etc/wifi/bcmdhd_ibss.bin
