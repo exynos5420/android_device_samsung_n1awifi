@@ -26,6 +26,10 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 # Bootloader
 TARGET_OTA_ASSERT_DEVICE := lt033g,lt03wifi,lt03wifiue,n1awifi
 
+# Releasetools
+TARGET_RELEASETOOLS_EXTENSIONS := device/samsung/n1awifi/releasetools
+TARGET_BOARD_INFO_FILE ?= device/samsung/n1awifi/board-info.txt
+
 # Kernel
 TARGET_KERNEL_CONFIG := liquiddeathos_deathly_n1awifi_defconfig
 
