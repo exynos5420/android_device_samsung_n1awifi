@@ -11,6 +11,8 @@ $(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
 
 PRODUCT_NAME := lineage_n1awifi
 PRODUCT_DEVICE := n1awifi
+PRODUCT_MANUFACTURER := samsung
+PRODUCT_GMS_CLIENTID_BASE := android-samsung
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_MODEL=SM-P600 \
