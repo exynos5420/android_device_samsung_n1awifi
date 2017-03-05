@@ -7,6 +7,3 @@ ro.radio.noril=yes
 
 # UI
 ro.sf.lcd_density=320
-
-# HW
-qemu.hw.mainkeys=1
