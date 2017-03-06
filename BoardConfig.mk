@@ -51,6 +51,7 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 4096
 
 # SELinux
+BOARD_SEPOLICY_DIRS += device/samsung/n1awifi/sepolicy
 BOARD_SEPOLICY_DIRS += device/samsung/exynos5420-common/sepolicy
 
 # Inherit from exynos5420-common
