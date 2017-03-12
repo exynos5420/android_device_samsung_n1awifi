@@ -55,3 +55,11 @@ on boot
     chown system radio /sys/class/sec/sec_epen/epen_checksum_result
     chown system radio /sys/class/sec/sec_epen/epen_saving_mode
     chown system radio /sys/class/sec/sec_epen/boost_level
+
+# Input Boosters
+    write /sys/module/mxts_n1/parameters/tsp_booster_enabled 0
+    write /sys/module/mxts_n1/parameters/touchkey_booster_enabled 0
+    write /sys/module/wacom_i2c_func/parameters/wacom_booster_enabled 0
+
+# Epen power saving mode
+    write /sys/devices/virtual/sec/sec_epen/epen_saving_mode 1    
