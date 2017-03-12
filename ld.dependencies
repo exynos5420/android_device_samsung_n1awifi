@@ -37,7 +37,7 @@
   },
   {
     "remote":      "github",
-    "repository":  "exynos5420/android_hardware_samsung_slsi-cm_exynos5420",
+    "repository":  "lineageos/android_hardware_samsung_slsi-cm_exynos5420",
     "target_path": "hardware/samsung_slsi-cm/exynos5420",
     "branch":      "cm-14.1"
   },
