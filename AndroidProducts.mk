@@ -18,3 +18,8 @@ LOCAL_PATH := device/samsung/n1awifi
 
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/lineage_n1awifi.mk
+
+COMMON_LUNCH_CHOICES := \
+    lineage_n1awifi-user \
+    lineage_n1awifi-userdebug \
+    lineage_n1awifi-eng
