@@ -38,6 +38,10 @@ BOARD_HARDWARE_CLASS += device/samsung/n1awifi/cmhw
 # Includes
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
+# GPS
+TARGET_LD_SHIM_LIBS += \
+	/system/bin/gpsd|libdmitry.so
+
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
 #HAX: real block size is too small to build a ROM
