@@ -22,6 +22,9 @@ LOCAL_PATH := device/samsung/n1awifi
 # Assert
 TARGET_OTA_ASSERT_DEVICE := lt033g,lt03wifi,lt03wifiue,n1awifi
 
+# Kernel
+TARGET_KERNEL_CONFIG := lineageos_n1awifi_defconfig
+
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
 #HAX: real block size is too small to build a ROM
