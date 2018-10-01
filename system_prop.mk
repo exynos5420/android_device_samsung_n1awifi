@@ -14,17 +14,7 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := device/samsung/n1awifi
-
-# Ramdisk
-PRODUCT_PACKAGES += \
-    init.target.rc
-
-# System properties
--include $(LOCAL_PATH)/system_prop.mk
-
-# Inherit from n1a-common
-$(call inherit-product, device/samsung/n1a-common/device-common.mk)
-
-# call the proprietary setup
-$(call inherit-product-if-exists, vendor/samsung/n1awifi/n1awifi-vendor.mk)
+# Radio
+PRODUCT_PROPERTY_OVERRIDES += \
+    keyguard.no_require_sim=true \
+    ro.radio.noril=1
