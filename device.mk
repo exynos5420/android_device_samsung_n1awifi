@@ -16,6 +16,8 @@
 
 LOCAL_PATH := device/samsung/n1awifi
 
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+
 # Ramdisk
 PRODUCT_PACKAGES += \
     init.target.rc
