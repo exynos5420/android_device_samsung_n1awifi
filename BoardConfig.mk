@@ -27,7 +27,7 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
 TARGET_OTA_ASSERT_DEVICE := lt033g,lt03wifi,lt03wifiue,n1awifi
 
 # Kernel
-TARGET_KERNEL_CONFIG := lineageos_deathly_n1awifi_defconfig
+TARGET_KERNEL_CONFIG := lineageos_n1awifi_defconfig
 
 # IR Blaster
 IR_HAS_ONE_FREQ_RANGE := true
