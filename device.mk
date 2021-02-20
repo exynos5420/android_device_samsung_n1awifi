@@ -54,10 +54,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/tablet_core_hardware.xml
 
-# Gello (CM browser)
-PRODUCT_PACKAGES += \
-    Gello
-
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.universal5420 \
