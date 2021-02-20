@@ -32,9 +32,6 @@ TARGET_KERNEL_CONFIG := lineageos_n1awifi_defconfig
 # IR Blaster
 IR_HAS_ONE_FREQ_RANGE := true
 
-# LineageOS Hardware
-BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/lineagehw
-
 # Includes
 TARGET_SPECIFIC_HEADER_PATH += $(LOCAL_PATH)/include
 
