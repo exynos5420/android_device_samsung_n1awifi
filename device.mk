@@ -60,6 +60,9 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     ueventd.universal5420.rc
 
+# System Properties
+$(call inherit-product, device/samsung/n1awifi/system_prop.mk)
+
 # Call the proprietary setup
 $(call inherit-product, vendor/samsung/n1awifi/n1awifi-vendor.mk)
 
