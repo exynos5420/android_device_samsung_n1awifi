@@ -11,7 +11,8 @@
     <item name="gps.on">0</item>
     <item name="dsp.audio">96.8</item>
     <item name="dsp.video">769</item>
-    <array name="cpu.speeds">
+    <item name="cpu.clusters.cores">4</item>
+    <array name="cpu.core_speeds.cluster0">
         <value>1900000</value>
         <value>1800000</value>
         <value>1700000</value>
@@ -34,9 +35,9 @@
         <value>300000</value>
         <value>250000</value>
     </array>
-    <item name="cpu.idle">3.56</item>
-    <item name="cpu.awake">75</item>
-    <array name="cpu.active">
+    <item name="cpu.suspend">3.56</item>
+    <item name="cpu.idle">75</item>
+    <array name="cpu.core_power.cluster0">
         <value>594</value>
         <value>574</value>
         <value>500</value>
