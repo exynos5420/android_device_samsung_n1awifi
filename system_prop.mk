@@ -18,3 +18,8 @@
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true \
     ro.radio.noril=1
+
+# Audio
+PRODUCT_PROPERTY_OVERRIDES += \
+    audio.offload.disable=1 \
+    audio_hal.disable_two_mic=true
