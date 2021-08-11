@@ -35,6 +35,6 @@ PRODUCT_GMS_CLIENTID_BASE := android-samsung
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=n1awifi \
-    PRIVATE_BUILD_DESC="lt03wifiue 5.1.1 LMY47X P600XXUDQA1 release-keys"
+    PRIVATE_BUILD_DESC="lt03wifixx-user 5.1.1 LMY47X P600XXSDRI1 release-keys"
 
-BUILD_FINGERPRINT := samsung/lt03wifiue/lt03wifiue:5.1.1/LMY47X/P600XXUDQA1:user/release-keys
+BUILD_FINGERPRINT := samsung/lt03wifixx/lt03wifi:5.1.1/LMY47X/P600XXSDRI1:user/release-keys
