@@ -20,7 +20,7 @@ include device/samsung/n1a-common/BoardConfigCommon.mk
 LOCAL_PATH := device/samsung/n1awifi
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := lt033g,lt03wifi,lt03wifiue,n1awifi
+TARGET_OTA_ASSERT_DEVICE := n1a3g,lt03wifi,lt03wifiue,n1awifi
 
 # Kernel
 TARGET_KERNEL_CONFIG := lineageos_n1awifi_defconfig
