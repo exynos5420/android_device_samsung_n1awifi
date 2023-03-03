@@ -24,6 +24,7 @@ set -e
 
 export DEVICE=n1awifi
 export DEVICE_COMMON=n1a-common
+export DEVICE_UNIVERSAL_COMMON=universal5420-common
 export VENDOR=samsung
 
 "./../../${VENDOR}/${DEVICE_COMMON}/extract-files.sh" "$@"
